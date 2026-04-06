@@ -54,13 +54,13 @@ body { font-family: var(--font); color: var(--text); -webkit-font-smoothing: ant
 }
 #search {
   width: 100%; padding: 7px var(--sp-3); border: 1px solid var(--border);
-  border-radius: var(--radius-sm); font-size: 12px; font-family: var(--font);
+  border-radius: var(--radius-sm); font-size: 13px; font-family: var(--font);
   transition: border-color 0.15s, box-shadow 0.15s;
   background: var(--bg-inset); color: var(--text);
 }
 #search:focus { outline:none; border-color: var(--accent); box-shadow: 0 0 0 2px rgba(44,94,160,0.15); background: var(--bg); }
 #search::placeholder { color: var(--text-muted); }
-#counter { margin-top: var(--sp-2); font-size: 10px; color: var(--text-muted); font-weight: 500; font-family: var(--font-mono); letter-spacing: 0.01em; }
+#counter { margin-top: var(--sp-2); font-size: 11px; color: var(--text-muted); font-weight: 500; font-family: var(--font-mono); letter-spacing: 0.01em; }
 #legend {
   position: absolute; top: var(--sp-3); right: var(--sp-3); z-index: 1000;
   background: var(--bg-panel);
@@ -86,26 +86,26 @@ body { font-family: var(--font); color: var(--text); -webkit-font-smoothing: ant
   background: var(--bg-panel);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md); box-shadow: var(--shadow-md);
-  padding: 6px var(--sp-3); font-size: 12px; cursor: pointer;
+  padding: 6px var(--sp-3); font-size: 13px; cursor: pointer;
   display: none; font-family: var(--font); font-weight: 500; color: var(--text-secondary);
   transition: all 0.15s;
 }
 #legend-toggle:hover { background: var(--bg-hover); color: var(--text); }
 #legend-close {
   position: absolute; top: var(--sp-2); right: var(--sp-2); z-index: 1;
-  background: none; border: none; font-size: 14px; cursor: pointer;
+  background: none; border: none; font-size: 15px; cursor: pointer;
   color: var(--text-muted); line-height: 1; width: 22px; height: 22px;
   display: flex; align-items: center; justify-content: center;
   border-radius: var(--radius-sm); transition: all 0.12s;
 }
 #legend-close:hover { color: var(--text); background: var(--bg-hover); }
 #legend h4 {
-  font-size: 10px; margin-bottom: var(--sp-2); color: var(--text-muted);
+  font-size: 11px; margin-bottom: var(--sp-2); color: var(--text-muted);
   font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
 }
 .legend-item {
   display: flex; align-items: center; margin-bottom: 2px;
-  cursor: pointer; font-size: 11px; padding: 3px var(--sp-1); border-radius: var(--radius-sm);
+  cursor: pointer; font-size: 12px; padding: 3px var(--sp-1); border-radius: var(--radius-sm);
   transition: background 0.1s;
 }
 .legend-item:hover { background: var(--bg-hover); }
@@ -125,7 +125,7 @@ body { font-family: var(--font); color: var(--text); -webkit-font-smoothing: ant
   display: flex;
   align-items: center;
   gap: var(--sp-1);
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text);
   margin-bottom: 3px;
   cursor: pointer;
@@ -160,7 +160,7 @@ body { font-family: var(--font); color: var(--text); -webkit-font-smoothing: ant
   border: none;
   background: transparent;
   cursor: pointer;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-secondary);
   padding: 2px;
   line-height: 1;
@@ -194,7 +194,7 @@ body { font-family: var(--font); color: var(--text); -webkit-font-smoothing: ant
 }
 .filter-count {
   color: var(--text-muted);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 500;
 }
 .simple-filter-list {
@@ -212,30 +212,30 @@ body { font-family: var(--font); color: var(--text); -webkit-font-smoothing: ant
 .area-filter { margin-top: 4px; }
 .area-slider-row { display: flex; align-items: center; gap: 6px; margin: 6px 0; }
 .area-slider-row input[type=range] { flex: 1; height: 6px; }
-.area-value { font-size: 11px; color: #555; min-width: 60px; text-align: right; }
+.area-value { font-size: 12px; color: #555; min-width: 60px; text-align: right; }
 .area-presets { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
 .area-preset-btn {
-  padding: 3px var(--sp-2); font-size: 10px; border: 1px solid var(--border);
+  padding: 3px var(--sp-2); font-size: 11px; border: 1px solid var(--border);
   border-radius: var(--radius-sm); background: var(--bg); cursor: pointer;
   transition: all 0.12s; font-family: var(--font); font-weight: 500; color: var(--text-muted);
 }
 .area-preset-btn:hover { background: var(--bg-hover); color: var(--text); border-color: var(--accent); }
 .area-preset-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-.area-input { width: 64px; padding: 2px var(--sp-1); font-size: 10px; border: 1px solid var(--border); border-radius: var(--radius-sm); text-align: right; font-family: var(--font-mono); background: var(--bg-inset); }
+.area-input { width: 64px; padding: 2px var(--sp-1); font-size: 11px; border: 1px solid var(--border); border-radius: var(--radius-sm); text-align: right; font-family: var(--font-mono); background: var(--bg-inset); }
 .area-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 2px rgba(44,94,160,0.1); background: var(--bg); }
 /* 색상 모드 토글 */
 .color-mode-toggle { display: flex; gap: 4px; margin-bottom: 8px; }
 .color-mode-btn {
-  flex: 1; padding: 5px var(--sp-2); font-size: 10px; border: 1px solid var(--border);
+  flex: 1; padding: 5px var(--sp-2); font-size: 11px; border: 1px solid var(--border);
   border-radius: var(--radius-sm); background: var(--bg); cursor: pointer;
   text-align: center; transition: all 0.12s; font-family: var(--font); font-weight: 500; color: var(--text-secondary);
 }
 .color-mode-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
 .color-mode-btn:hover:not(.active) { background: var(--bg-hover); border-color: var(--accent); color: var(--accent); }
 /* 개별 숨김 표시 */
-.hidden-count { font-size: 10px; color: var(--danger); margin-left: var(--sp-1); }
+.hidden-count { font-size: 11px; color: var(--danger); margin-left: var(--sp-1); }
 .restore-hidden-btn {
-  display: none; margin-top: var(--sp-2); padding: 5px var(--sp-3); font-size: 10px;
+  display: none; margin-top: var(--sp-2); padding: 5px var(--sp-3); font-size: 11px;
   border: 1px solid var(--danger); border-radius: var(--radius-sm);
   background: var(--bg); color: var(--danger); cursor: pointer; width: 100%;
   font-family: var(--font); font-weight: 500; transition: all 0.12s;
@@ -245,7 +245,7 @@ body { font-family: var(--font); color: var(--text); -webkit-font-smoothing: ant
 #hidden-list-wrap { display: none; margin-top: 6px; }
 #hidden-list-wrap.show { display: block; }
 #hidden-list {
-  max-height: 150px; overflow-y: auto; font-size: 10px;
+  max-height: 150px; overflow-y: auto; font-size: 11px;
   border: 1px solid var(--border-grid); border-radius: var(--radius-sm); padding: var(--sp-1);
 }
 .hidden-item {
@@ -256,25 +256,25 @@ body { font-family: var(--font); color: var(--text); -webkit-font-smoothing: ant
 .hidden-item-name { color: var(--text); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .hidden-item-restore {
   background: none; border: none; color: var(--accent); cursor: pointer;
-  font-size: 11px; padding: 0 4px; flex-shrink: 0; font-weight: 500;
+  font-size: 12px; padding: 0 4px; flex-shrink: 0; font-weight: 500;
 }
 .hidden-item-restore:hover { text-decoration: underline; }
 /* 사이드 상세 패널 */
 #detail-panel { display:none; margin-top:var(--sp-3); padding:var(--sp-3); border:1px solid var(--border-grid); border-radius:var(--radius-md); background:var(--bg-secondary); max-height:250px; overflow-y:auto; }
 #detail-panel.show { display:block; }
 #detail-panel .detail-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--sp-2); padding-bottom:var(--sp-2); border-bottom:1px solid var(--border-grid); }
-#detail-panel .detail-header span { font-size:10px; color:var(--warning); font-weight:600; letter-spacing:0.02em; }
-#detail-panel .detail-header button { background:none; border:none; cursor:pointer; font-size:12px; color:var(--text-muted); width:20px; height:20px; display:flex; align-items:center; justify-content:center; border-radius:var(--radius-sm); transition:all .12s; }
+#detail-panel .detail-header span { font-size:11px; color:var(--warning); font-weight:600; letter-spacing:0.02em; }
+#detail-panel .detail-header button { background:none; border:none; cursor:pointer; font-size:13px; color:var(--text-muted); width:22px; height:20px; display:flex; align-items:center; justify-content:center; border-radius:var(--radius-sm); transition:all .12s; }
 #detail-panel .detail-header button:hover { color:var(--text); background:var(--bg-hover); }
 #detail-panel .detail-card { padding:var(--sp-2) var(--sp-1); cursor:pointer; border-radius:var(--radius-sm); transition:background .1s; border-bottom:1px solid var(--border-grid); }
 #detail-panel .detail-card:last-child { border-bottom:none; }
 #detail-panel .detail-card:hover { background:var(--accent-light); }
 #detail-panel .detail-card.active { background:var(--accent-light); border-left:2px solid var(--accent); }
-.popup-pin-btn { display:inline-block; margin-top:var(--sp-2); padding:3px var(--sp-2); font-size:10px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--bg); color:var(--text-secondary); cursor:pointer; font-family:var(--font); font-weight:500; transition:all .12s; }
+.popup-pin-btn { display:inline-block; margin-top:var(--sp-2); padding:3px var(--sp-2); font-size:11px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--bg); color:var(--text-secondary); cursor:pointer; font-family:var(--font); font-weight:500; transition:all .12s; }
 .popup-pin-btn:hover { border-color:var(--accent); color:var(--accent); background:var(--accent-light); }
 /* 팝업 스타일 오버라이드 */
 .leaflet-popup-content-wrapper { border-radius: var(--radius-md) !important; box-shadow: var(--shadow-lg) !important; border: 1px solid var(--border-light); padding: 0 !important; background: var(--bg) !important; }
-.leaflet-popup-content { margin: var(--sp-3) var(--sp-4) !important; font-family: var(--font) !important; font-size: 11px !important; line-height: 1.6 !important; }
+.leaflet-popup-content { margin: var(--sp-3) var(--sp-4) !important; font-family: var(--font) !important; font-size: 12px !important; line-height: 1.6 !important; }
 .leaflet-popup-tip { box-shadow: var(--shadow-sm) !important; background: var(--bg) !important; }
 .leaflet-popup-close-button { font-size: 16px !important; color: var(--text-muted) !important; padding: var(--sp-1) var(--sp-2) !important; }
 .leaflet-popup-close-button:hover { color: var(--text) !important; }
@@ -321,12 +321,12 @@ body { font-family: var(--font); color: var(--text); -webkit-font-smoothing: ant
     <h4>면적</h4>
     <div class="area-filter">
       <div class="area-slider-row">
-        <span style="font-size:11px">최소</span>
+        <span style="font-size:12px">최소</span>
         <input type="range" id="area-min" min="0" max="500000" step="1000" value="0">
         <input type="number" id="area-min-input" class="area-input" min="0" max="500000" step="100" value="0" placeholder="㎡">㎡
       </div>
       <div class="area-slider-row">
-        <span style="font-size:11px">최대</span>
+        <span style="font-size:12px">최대</span>
         <input type="range" id="area-max" min="0" max="500000" step="1000" value="500000">
         <input type="number" id="area-max-input" class="area-input" min="0" max="500000" step="100" value="500000" placeholder="㎡">㎡
       </div>
@@ -624,14 +624,14 @@ function buildPopupCard(hp) {
   const gn = hp['자치구']||'-';
   const am = hp['면적_m2']?Math.round(hp['면적_m2']).toLocaleString('ko-KR')+' ㎡':'-';
   return `<div style="line-height:1.5">
-    <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:4px;letter-spacing:-0.01em">${hp['사업명']||'-'}</div>
-    <span style="display:inline-block;background:var(--accent-light);color:var(--accent);border-radius:2px;padding:1px 6px;font-size:9px;font-weight:600;letter-spacing:0.02em">${tn}</span>
-    <div style="display:grid;grid-template-columns:auto 1fr;gap:2px 8px;margin-top:6px;font-size:10px;padding:6px 8px;background:var(--bg-secondary);border-radius:var(--radius-sm);border:1px solid var(--border-grid)">
+    <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;letter-spacing:-0.01em">${hp['사업명']||'-'}</div>
+    <span style="display:inline-block;background:var(--accent-light);color:var(--accent);border-radius:2px;padding:1px 6px;font-size:10px;font-weight:600;letter-spacing:0.02em">${tn}</span>
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:2px 8px;margin-top:6px;font-size:11px;padding:6px 8px;background:var(--bg-secondary);border-radius:var(--radius-sm);border:1px solid var(--border-grid)">
       <span style="color:var(--text-muted);font-weight:500">자치구</span><span style="color:var(--text)">${gn}</span>
       <span style="color:var(--text-muted);font-weight:500">단계</span><span style="color:var(--text)">${pn}</span>
       <span style="color:var(--text-muted);font-weight:500">면적</span><span style="color:var(--text);font-family:var(--font-mono)">${am}</span>
     </div>
-    <button onclick="hideFeature('${hp['PRESENT_SN']}')" style="margin-top:5px;padding:2px 8px;font-size:9px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg);color:var(--text-muted);cursor:pointer;font-weight:500;font-family:var(--font);transition:all .12s" onmouseover="this.style.borderColor='var(--danger)';this.style.color='var(--danger)'" onmouseout="this.style.borderColor='';this.style.color=''">\uc228\uae30\uae30</button>
+    <button onclick="hideFeature('${hp['PRESENT_SN']}')" style="margin-top:5px;padding:2px 8px;font-size:10px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg);color:var(--text-muted);cursor:pointer;font-weight:500;font-family:var(--font);transition:all .12s" onmouseover="this.style.borderColor='var(--danger)';this.style.color='var(--danger)'" onmouseout="this.style.borderColor='';this.style.color=''">\uc228\uae30\uae30</button>
   </div>`;
 }
 
@@ -655,7 +655,7 @@ function openOverlapPopup(latlng, hits) {
       ${buildPopupCard(h.props).replace(/^<div[^>]*>/,'').replace(/<\/div>$/,'')}
     </div>`;
   }).join('');
-  const header = hits.length > 1 ? `<div style="font-size:10px;color:var(--warning);font-weight:600;margin-bottom:6px;letter-spacing:0.01em">${hits.length}\uac74 \uacb9\uce68 \u2014 \uce74\ub4dc\ub97c \ub20c\ub7ec \uc678\uacfd\uc120 \ud655\uc778</div>` : '';
+  const header = hits.length > 1 ? `<div style="font-size:11px;color:var(--warning);font-weight:600;margin-bottom:6px;letter-spacing:0.01em">${hits.length}\uac74 \uacb9\uce68 \u2014 \uce74\ub4dc\ub97c \ub20c\ub7ec \uc678\uacfd\uc120 \ud655\uc778</div>` : '';
   const pinBtn = `<div style="text-align:right;margin-top:var(--sp-2)"><button onclick="pinToSide()" class="popup-pin-btn">\uc0ac\uc774\ub4dc \uace0\uc815</button></div>`;
   L.popup({maxWidth:420,maxHeight:400}).setLatLng(latlng).setContent(header + cards + pinBtn).openOn(map);
 }
