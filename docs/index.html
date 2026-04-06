@@ -184,6 +184,23 @@ body { font-family: 'Noto Sans KR', sans-serif; }
 }
 .restore-hidden-btn:hover { background: #fdecea; }
 .restore-hidden-btn.show { display: block; }
+#hidden-list-wrap { display: none; margin-top: 6px; }
+#hidden-list-wrap.show { display: block; }
+#hidden-list {
+  max-height: 150px; overflow-y: auto; font-size: 11px;
+  border: 1px solid #f0e0e0; border-radius: 4px; padding: 4px;
+}
+.hidden-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 3px 4px; border-bottom: 1px solid #f5f5f5;
+}
+.hidden-item:last-child { border-bottom: none; }
+.hidden-item-name { color: #333; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hidden-item-restore {
+  background: none; border: none; color: #3498db; cursor: pointer;
+  font-size: 11px; padding: 0 4px; flex-shrink: 0;
+}
+.hidden-item-restore:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
@@ -200,6 +217,9 @@ body { font-family: 'Noto Sans KR', sans-serif; }
       <button class="color-mode-btn" data-mode="stage">🚦 진행단계 색상</button>
     </div>
     <button id="restore-hidden" class="restore-hidden-btn">🔄 숨긴 필지 모두 복원</button>
+    <div id="hidden-list-wrap">
+      <div id="hidden-list"></div>
+    </div>
   </div>
   <div class="filter-section">
     <h4>🏙️ 사업유형</h4>
@@ -633,29 +653,50 @@ document.querySelectorAll('.color-mode-btn').forEach(btn => {
   });
 });
 
+// SN → 사업명 조회 인덱스
+const _snNameMap = {};
+GEOJSON.features.forEach(f => {
+  const p = f.properties;
+  if (p.PRESENT_SN) _snNameMap[p.PRESENT_SN] = p['사업명'] || p.PRESENT_SN;
+});
+
 // 개별 필지 숨기기 (팝업 버튼에서 호출)
 function hideFeature(sn) {
   if (!sn) return;
   hiddenSNs.add(sn);
   map.closePopup();
   applyFilters();
-  updateHiddenCount();
+  updateHiddenUI();
 }
 
-// 숨긴 필지 복원
-function updateHiddenCount() {
+function restoreFeature(sn) {
+  hiddenSNs.delete(sn);
+  applyFilters();
+  updateHiddenUI();
+}
+
+function updateHiddenUI() {
   const btn = document.getElementById('restore-hidden');
+  const wrap = document.getElementById('hidden-list-wrap');
+  const list = document.getElementById('hidden-list');
   if (hiddenSNs.size > 0) {
     btn.textContent = `🔄 숨긴 필지 모두 복원 (${hiddenSNs.size}건)`;
     btn.classList.add('show');
+    wrap.classList.add('show');
+    list.innerHTML = Array.from(hiddenSNs).map(sn => {
+      const name = _snNameMap[sn] || sn;
+      return `<div class="hidden-item"><span class="hidden-item-name" title="${name}">${name}</span><button class="hidden-item-restore" onclick="restoreFeature('${sn}')">\u21a9 복원</button></div>`;
+    }).join('');
   } else {
     btn.classList.remove('show');
+    wrap.classList.remove('show');
+    list.innerHTML = '';
   }
 }
 document.getElementById('restore-hidden').addEventListener('click', function() {
   hiddenSNs.clear();
   applyFilters();
-  updateHiddenCount();
+  updateHiddenUI();
 });
 
 bindMasterCheckboxes();
