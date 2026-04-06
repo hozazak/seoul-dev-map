@@ -554,6 +554,52 @@ function buildPopupCard(hp) {
   </div>`;
 }
 
+// 겹침 팝업: 1건이면 바로 상세, 2건+ 이면 목록→선택→하이라이트+상세
+function openOverlapPopup(latlng, hits, defaultGeom) {
+  if (highlightLayer) { map.removeLayer(highlightLayer); highlightLayer = null; }
+  if (hits.length === 1) {
+    // 단일 — 바로 상세 + 하이라이트
+    highlightLayer = L.geoJSON(hits[0].geometry, {
+      style: { color: '#e74c3c', weight: 3, fillOpacity: 0, dashArray: '6,4' }, interactive: false
+    }).addTo(map);
+    L.popup({maxWidth:320,maxHeight:400}).setLatLng(latlng)
+      .setContent(buildPopupCard(hits[0].props)).openOn(map);
+    return;
+  }
+  // 다중 — 목록 표시
+  window._overlapHits = hits;
+  window._overlapLatLng = latlng;
+  const listItems = hits.map((h, i) => {
+    const tn = _BZ_MAP[h.props['소분류']]||_BZ_MAP[h.props['대분류']]||'-';
+    const pp = _PP_MAP[h.props['추진단계']]||'-';
+    return `<div onclick="selectOverlapItem(${i})" style="padding:6px 8px;cursor:pointer;border-bottom:1px solid #eee;transition:background .15s"
+      onmouseover="this.style.background='#f0f4ff'" onmouseout="this.style.background=''">
+      <b style="font-size:12px">${h.props['사업명']||'-'}</b><br>
+      <span style="font-size:10px;color:#666">${tn} · ${pp}</span>
+    </div>`;
+  }).join('');
+  const content = `<div style="min-width:220px">
+    <div style="font-size:11px;color:#e67e22;font-weight:bold;padding:6px 8px;border-bottom:2px solid #e67e22">⚠️ ${hits.length}건 겹침 — 선택하세요</div>
+    <div style="max-height:200px;overflow-y:auto">${listItems}</div>
+  </div>`;
+  L.popup({maxWidth:320,maxHeight:320,closeButton:true}).setLatLng(latlng).setContent(content).openOn(map);
+}
+
+// 겹침 목록에서 항목 선택
+function selectOverlapItem(idx) {
+  const hit = window._overlapHits[idx];
+  const latlng = window._overlapLatLng;
+  if (!hit) return;
+  if (highlightLayer) { map.removeLayer(highlightLayer); highlightLayer = null; }
+  highlightLayer = L.geoJSON(hit.geometry, {
+    style: { color: '#e74c3c', weight: 3, fillOpacity: 0, dashArray: '6,4' }, interactive: false
+  }).addTo(map);
+  // 상세 팝업 + 뒤로가기 버튼
+  const backBtn = `<div onclick="openOverlapPopup(window._overlapLatLng, window._overlapHits)" style="margin-bottom:6px;cursor:pointer;color:#3498db;font-size:11px">← 목록으로</div>`;
+  L.popup({maxWidth:320,maxHeight:400}).setLatLng(latlng)
+    .setContent(backBtn + buildPopupCard(hit.props)).openOn(map);
+}
+
 function onEachFeature(feature, layer) {
   const p = feature.properties;
   const 면적 = p['면적_m2'] ? (p['면적_m2'] / 10000).toFixed(2) + ' ha' : '-';
@@ -572,29 +618,18 @@ function onEachFeature(feature, layer) {
     const hits = [];
     const seen = new Set();
     allLayers.forEach(item => {
-      if (!item.layer._map) return; // 필터링으로 제거된 레이어 스킵
+      if (!item.layer._map) return;
       try {
         if (item.layer.getBounds && item.layer.getBounds().contains(latlng)) {
           const sn = item.props['PRESENT_SN'];
-          if (!seen.has(sn)) { seen.add(sn); hits.push(item.props); }
+          if (!seen.has(sn)) { seen.add(sn); hits.push({ props: item.props, geometry: item.geometry }); }
         }
       } catch(ex) {}
     });
-    if (hits.length === 0) hits.push(p);
-    const cards = hits.map((hp, idx) => {
-      const sep = idx > 0 ? 'border-top:1px solid #e0e0e0;padding-top:6px;margin-top:6px;' : '';
-      return `<div style="${sep}">${buildPopupCard(hp).replace('<div>','').replace('</div>','')}</div>`;
-    }).join('');
-    const header = hits.length > 1 ? `<div style="font-size:11px;color:#e67e22;font-weight:bold;margin-bottom:4px">⚠️ ${hits.length}건 겹침</div>` : '';
-    // 클릭한 폴리곤 외곽선 하이라이트
-    if (highlightLayer) { map.removeLayer(highlightLayer); highlightLayer = null; }
-    highlightLayer = L.geoJSON(feature.geometry, {
-      style: { color: '#e74c3c', weight: 3, fillOpacity: 0, dashArray: '6,4' },
-      interactive: false
-    }).addTo(map);
-    L.popup({maxWidth:320,maxHeight:400}).setLatLng(e.latlng).setContent(header + cards).openOn(map);
+    if (hits.length === 0) hits.push({ props: p, geometry: feature.geometry });
+    openOverlapPopup(latlng, hits, feature.geometry);
   });
-  allLayers.push({ layer, props: p });
+  allLayers.push({ layer, props: p, geometry: feature.geometry });
 }
 
 
