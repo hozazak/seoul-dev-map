@@ -274,7 +274,7 @@ body { font-family: var(--font); color: var(--text); -webkit-font-smoothing: ant
 .popup-pin-btn:hover { border-color:var(--accent); color:var(--accent); background:var(--accent-light); }
 /* 팝업 스타일 오버라이드 */
 .leaflet-popup-content-wrapper { border-radius: var(--radius-md) !important; box-shadow: var(--shadow-lg) !important; border: 1px solid var(--border-light); padding: 0 !important; background: var(--bg) !important; }
-.leaflet-popup-content { margin: var(--sp-3) var(--sp-4) !important; font-family: var(--font) !important; font-size: 12px !important; line-height: 1.6 !important; }
+.leaflet-popup-content { margin: var(--sp-3) var(--sp-4) !important; font-family: var(--font) !important; font-size: 13px !important; line-height: 1.6 !important; }
 .leaflet-popup-tip { box-shadow: var(--shadow-sm) !important; background: var(--bg) !important; }
 .leaflet-popup-close-button { font-size: 16px !important; color: var(--text-muted) !important; padding: var(--sp-1) var(--sp-2) !important; }
 .leaflet-popup-close-button:hover { color: var(--text) !important; }
@@ -624,14 +624,14 @@ function buildPopupCard(hp) {
   const gn = hp['자치구']||'-';
   const am = hp['면적_m2']?Math.round(hp['면적_m2']).toLocaleString('ko-KR')+' ㎡':'-';
   return `<div style="line-height:1.5">
-    <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;letter-spacing:-0.01em">${hp['사업명']||'-'}</div>
-    <span style="display:inline-block;background:var(--accent-light);color:var(--accent);border-radius:2px;padding:1px 6px;font-size:10px;font-weight:600;letter-spacing:0.02em">${tn}</span>
-    <div style="display:grid;grid-template-columns:auto 1fr;gap:2px 8px;margin-top:6px;font-size:11px;padding:6px 8px;background:var(--bg-secondary);border-radius:var(--radius-sm);border:1px solid var(--border-grid)">
+    <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;letter-spacing:-0.01em">${hp['사업명']||'-'}</div>
+    <span style="display:inline-block;background:var(--accent-light);color:var(--accent);border-radius:2px;padding:1px 6px;font-size:11px;font-weight:600;letter-spacing:0.02em">${tn}</span>
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:2px 8px;margin-top:6px;font-size:12px;padding:6px 8px;background:var(--bg-secondary);border-radius:var(--radius-sm);border:1px solid var(--border-grid)">
       <span style="color:var(--text-muted);font-weight:500">자치구</span><span style="color:var(--text)">${gn}</span>
       <span style="color:var(--text-muted);font-weight:500">단계</span><span style="color:var(--text)">${pn}</span>
       <span style="color:var(--text-muted);font-weight:500">면적</span><span style="color:var(--text);font-family:var(--font-mono)">${am}</span>
     </div>
-    <button onclick="hideFeature('${hp['PRESENT_SN']}')" style="margin-top:5px;padding:2px 8px;font-size:10px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg);color:var(--text-muted);cursor:pointer;font-weight:500;font-family:var(--font);transition:all .12s" onmouseover="this.style.borderColor='var(--danger)';this.style.color='var(--danger)'" onmouseout="this.style.borderColor='';this.style.color=''">\uc228\uae30\uae30</button>
+    <button onclick="hideFeature('${hp['PRESENT_SN']}')" style="margin-top:5px;padding:2px 8px;font-size:11px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg);color:var(--text-muted);cursor:pointer;font-weight:500;font-family:var(--font);transition:all .12s" onmouseover="this.style.borderColor='var(--danger)';this.style.color='var(--danger)'" onmouseout="this.style.borderColor='';this.style.color=''">\uc228\uae30\uae30</button>
   </div>`;
 }
 
@@ -655,7 +655,7 @@ function openOverlapPopup(latlng, hits) {
       ${buildPopupCard(h.props).replace(/^<div[^>]*>/,'').replace(/<\/div>$/,'')}
     </div>`;
   }).join('');
-  const header = hits.length > 1 ? `<div style="font-size:11px;color:var(--warning);font-weight:600;margin-bottom:6px;letter-spacing:0.01em">${hits.length}\uac74 \uacb9\uce68 \u2014 \uce74\ub4dc\ub97c \ub20c\ub7ec \uc678\uacfd\uc120 \ud655\uc778</div>` : '';
+  const header = hits.length > 1 ? `<div style="font-size:12px;color:var(--warning);font-weight:600;margin-bottom:6px;letter-spacing:0.01em">${hits.length}\uac74 \uacb9\uce68 \u2014 \uce74\ub4dc\ub97c \ub20c\ub7ec \uc678\uacfd\uc120 \ud655\uc778</div>` : '';
   const pinBtn = `<div style="text-align:right;margin-top:var(--sp-2)"><button onclick="pinToSide()" class="popup-pin-btn">\uc0ac\uc774\ub4dc \uace0\uc815</button></div>`;
   L.popup({maxWidth:420,maxHeight:400}).setLatLng(latlng).setContent(header + cards + pinBtn).openOn(map);
 }
