@@ -313,7 +313,7 @@ let areaMax = 500000;
 const AREA_MAX_LIMIT = 500000;
 
 const map = L.map('map').setView([37.5665, 126.978], 11);
-// 베이스맵 레이어 (VWorld)
+// 베이스맵 레이어 (VWorld + CARTO)
 const VWORLD_KEY = 'A1B705BA-D8D0-38DF-9B5D-598162D8EC1F';
 const baseStreet = L.tileLayer(`https://api.vworld.kr/req/wmts/1.0.0/${VWORLD_KEY}/Base/{z}/{y}/{x}.png`, {
   attribution: '© VWorld 국토교통부 | 서울도시공간포털 UPIS',
@@ -327,11 +327,16 @@ const baseHybrid = L.layerGroup([
   L.tileLayer(`https://api.vworld.kr/req/wmts/1.0.0/${VWORLD_KEY}/Satellite/{z}/{y}/{x}.jpeg`, { maxZoom: 19 }),
   L.tileLayer(`https://api.vworld.kr/req/wmts/1.0.0/${VWORLD_KEY}/Hybrid/{z}/{y}/{x}.png`, { maxZoom: 19 })
 ]);
+const baseGray = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+  attribution: '© OpenStreetMap © CARTO | UPIS',
+  maxZoom: 19
+});
 baseStreet.addTo(map);
 L.control.layers({
   '🗺️ 지도': baseStreet,
   '🛰️ 위성': baseSatellite,
-  '🌐 하이브리드': baseHybrid
+  '🌐 하이브리드': baseHybrid,
+  '⬜ 흑백': baseGray
 }, null, { position: 'topleft' }).addTo(map);
 function getColor(lclas) {
   return COLOR_MAP[lclas] || COLOR_MAP[''] || '#999';
