@@ -633,7 +633,7 @@ function openOverlapPopup(latlng, hits) {
     const sep = idx > 0 ? 'border-top:1px solid #e0e0e0;padding-top:6px;margin-top:6px;' : '';
     return `<div id="overlap-card-${idx}" onclick="highlightFeature(${idx})" style="${sep}cursor:pointer;padding:4px;border-radius:6px;transition:background .15s;${idx===0?'background:#eef2ff;':''}"
       onmouseover="this.style.background='#f0f4ff'" onmouseout="if(!this.classList.contains('hl-active'))this.style.background=''">
-      ${buildPopupCard(h.props).replace(/^<div>/,'').replace(/<\/div>$/,'')}
+      ${buildPopupCard(h.props).replace(/^<div[^>]*>/,'').replace(/<\/div>$/,'')}
     </div>`;
   }).join('');
   const header = hits.length > 1 ? `<div style="font-size:11px;color:#e67e22;font-weight:bold;margin-bottom:6px">\u26a0\ufe0f ${hits.length}\uac74 \uacb9\uce68 \u2014 \uce74\ub4dc\ub97c \ub20c\ub7ec \uc678\uacfd\uc120 \ud655\uc778</div>` : '';
@@ -678,7 +678,7 @@ function pinToSide() {
     : `<div class="detail-header"><span>\ud83d\udccd \uc0ac\uc5c5 \uc0c1\uc138</span><button onclick="closeSidePanel()" title="\ub2eb\uae30">\u2715</button></div>`;
   const cards = hits.map((h, idx) => {
     return `<div class="detail-card${idx===0?' active':''}" onclick="highlightFeature(${idx})">
-      ${buildPopupCard(h.props).replace(/^<div>/,'').replace(/<\/div>$/,'')}
+      ${buildPopupCard(h.props).replace(/^<div[^>]*>/,'').replace(/<\/div>$/,'')}
     </div>`;
   }).join('');
   const popupBtn = `<div style="text-align:right;margin-top:6px"><button onclick="sideToPopup()" class="popup-pin-btn">\u2197 \ud31d\uc5c5\uc73c\ub85c</button></div>`;
