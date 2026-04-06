@@ -331,12 +331,12 @@ const baseGray = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x
   attribution: '© OpenStreetMap © CARTO | UPIS',
   maxZoom: 19
 });
-baseStreet.addTo(map);
+baseGray.addTo(map);
 L.control.layers({
+  '⬜ 흑백': baseGray,
   '🗺️ 지도': baseStreet,
   '🛰️ 위성': baseSatellite,
-  '🌐 하이브리드': baseHybrid,
-  '⬜ 흑백': baseGray
+  '🌐 하이브리드': baseHybrid
 }, null, { position: 'topleft' }).addTo(map);
 function getColor(lclas) {
   return COLOR_MAP[lclas] || COLOR_MAP[''] || '#999';
