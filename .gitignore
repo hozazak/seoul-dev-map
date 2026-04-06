@@ -1,0 +1,24 @@
+# 데이터 수집 원본 (API 키 포함 스크립트에서 생성)
+data/
+
+# 백업
+output/backups/
+
+# 수집/가공 스크립트 (API 엔드포인트, 키 포함)
+*.py
+logs/
+PLAN.md
+
+# OS
+.DS_Store
+
+# 배포 대상은 docs/ 만
+output/*.geojson
+output/*.shp
+output/*.shx
+output/*.dbf
+output/*.prj
+output/*.cpg
+output/*.zip
+output/*.png
+output/*.bak-*
