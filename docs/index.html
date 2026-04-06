@@ -328,6 +328,7 @@ let geojsonLayer;
 let searchTerm = '';
 let colorMode = 'type'; // 'type' or 'stage'
 let hiddenSNs = new Set(); // 개별 숨김
+let highlightLayer = null; // 클릭 하이라이트
 let areaMin = 0;
 let areaMax = 500000;
 const AREA_MAX_LIMIT = 500000;
@@ -585,6 +586,12 @@ function onEachFeature(feature, layer) {
       return `<div style="${sep}">${buildPopupCard(hp).replace('<div>','').replace('</div>','')}</div>`;
     }).join('');
     const header = hits.length > 1 ? `<div style="font-size:11px;color:#e67e22;font-weight:bold;margin-bottom:4px">⚠️ ${hits.length}건 겹침</div>` : '';
+    // 클릭한 폴리곤 외곽선 하이라이트
+    if (highlightLayer) { map.removeLayer(highlightLayer); highlightLayer = null; }
+    highlightLayer = L.geoJSON(feature.geometry, {
+      style: { color: '#e74c3c', weight: 3, fillOpacity: 0, dashArray: '6,4' },
+      interactive: false
+    }).addTo(map);
     L.popup({maxWidth:320,maxHeight:400}).setLatLng(e.latlng).setContent(header + cards).openOn(map);
   });
   allLayers.push({ layer, props: p });
@@ -595,6 +602,11 @@ geojsonLayer = L.geoJSON(GEOJSON, {
   style: styleFeature,
   onEachFeature: onEachFeature
 }).addTo(map);
+
+// 팝업 닫으면 하이라이트 제거
+map.on('popupclose', function() {
+  if (highlightLayer) { map.removeLayer(highlightLayer); highlightLayer = null; }
+});
 
 document.getElementById('search').addEventListener('input', (e) => {
   searchTerm = e.target.value.trim().toLowerCase();
