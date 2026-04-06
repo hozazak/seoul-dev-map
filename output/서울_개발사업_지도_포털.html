@@ -12,7 +12,7 @@
 :root {
   /* 디지털 청사진 — 도시계획 도구 */
   --bg: #ffffff;
-  --bg-panel: rgba(248,250,252,0.92);
+  --bg-panel: #f8fafb;
   --bg-secondary: #f1f4f8;
   --bg-hover: #e8ecf1;
   --bg-inset: #edf0f5;
@@ -47,7 +47,7 @@ body { font-family: var(--font); color: var(--text); -webkit-font-smoothing: ant
 #map { width: 100%; height: 100vh; }
 #controls {
   position: absolute; top: var(--sp-3); left: 56px; z-index: 1000;
-  background: var(--bg-panel); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  background: var(--bg-panel);
   padding: var(--sp-3) var(--sp-4); border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md); border: 1px solid var(--border-light);
   max-width: 280px;
@@ -63,7 +63,7 @@ body { font-family: var(--font); color: var(--text); -webkit-font-smoothing: ant
 #counter { margin-top: var(--sp-2); font-size: 10px; color: var(--text-muted); font-weight: 500; font-family: var(--font-mono); letter-spacing: 0.01em; }
 #legend {
   position: absolute; top: var(--sp-3); right: var(--sp-3); z-index: 1000;
-  background: var(--bg-panel); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  background: var(--bg-panel);
   padding: var(--sp-4); border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg); border: 1px solid var(--border-light);
   max-height: calc(100vh - var(--sp-6));
@@ -83,7 +83,7 @@ body { font-family: var(--font); color: var(--text); -webkit-font-smoothing: ant
 }
 #legend-toggle {
   position: absolute; top: var(--sp-3); right: var(--sp-3); z-index: 1001;
-  background: var(--bg-panel); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  background: var(--bg-panel);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md); box-shadow: var(--shadow-md);
   padding: 6px var(--sp-3); font-size: 12px; cursor: pointer;
@@ -273,9 +273,9 @@ body { font-family: var(--font); color: var(--text); -webkit-font-smoothing: ant
 .popup-pin-btn { display:inline-block; margin-top:var(--sp-2); padding:3px var(--sp-2); font-size:10px; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--bg); color:var(--text-secondary); cursor:pointer; font-family:var(--font); font-weight:500; transition:all .12s; }
 .popup-pin-btn:hover { border-color:var(--accent); color:var(--accent); background:var(--accent-light); }
 /* 팝업 스타일 오버라이드 */
-.leaflet-popup-content-wrapper { border-radius: var(--radius-md) !important; box-shadow: var(--shadow-lg) !important; border: 1px solid var(--border-light); padding: 0 !important; background: var(--bg-panel) !important; backdrop-filter: blur(12px) !important; -webkit-backdrop-filter: blur(12px) !important; }
+.leaflet-popup-content-wrapper { border-radius: var(--radius-md) !important; box-shadow: var(--shadow-lg) !important; border: 1px solid var(--border-light); padding: 0 !important; background: var(--bg) !important; }
 .leaflet-popup-content { margin: var(--sp-3) var(--sp-4) !important; font-family: var(--font) !important; font-size: 11px !important; line-height: 1.6 !important; }
-.leaflet-popup-tip { box-shadow: var(--shadow-sm) !important; background: var(--bg-panel) !important; }
+.leaflet-popup-tip { box-shadow: var(--shadow-sm) !important; background: var(--bg) !important; }
 .leaflet-popup-close-button { font-size: 16px !important; color: var(--text-muted) !important; padding: var(--sp-1) var(--sp-2) !important; }
 .leaflet-popup-close-button:hover { color: var(--text) !important; }
 </style>
@@ -432,7 +432,7 @@ const baseGray = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x
 });
 baseGray.addTo(map);
 L.control.layers({
-  '⬜ 흑백': baseGray,
+  '흑백': baseGray,
   '지도': baseStreet,
   '위성': baseSatellite,
   '하이브리드': baseHybrid
@@ -623,11 +623,15 @@ function buildPopupCard(hp) {
   const pn = _PP_MAP[hp['추진단계']]||hp['추진단계']||'-';
   const gn = hp['자치구']||'-';
   const am = hp['면적_m2']?Math.round(hp['면적_m2']).toLocaleString('ko-KR')+' ㎡':'-';
-  return `<div style="line-height:1.6">
-    <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:3px;letter-spacing:-0.01em">${hp['사업명']||'-'}</div>
-    <span style="display:inline-block;background:var(--accent-light);color:var(--accent);border-radius:2px;padding:1px 6px;font-size:9px;font-weight:600;letter-spacing:0.02em;margin-bottom:4px">${tn}</span><br>
-    <span style="font-size:10px;color:var(--text-muted);font-family:var(--font)">${gn} \u00b7 ${pn} \u00b7 ${am}</span>
-    <br><button onclick="hideFeature('${hp['PRESENT_SN']}')" style="margin-top:4px;padding:2px 8px;font-size:9px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg);color:var(--text-muted);cursor:pointer;font-weight:500;font-family:var(--font);transition:all .12s" onmouseover="this.style.borderColor='var(--danger)';this.style.color='var(--danger)'" onmouseout="this.style.borderColor='';this.style.color=''">\uc228\uae30\uae30</button>
+  return `<div style="line-height:1.5">
+    <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:4px;letter-spacing:-0.01em">${hp['사업명']||'-'}</div>
+    <span style="display:inline-block;background:var(--accent-light);color:var(--accent);border-radius:2px;padding:1px 6px;font-size:9px;font-weight:600;letter-spacing:0.02em">${tn}</span>
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:2px 8px;margin-top:6px;font-size:10px;padding:6px 8px;background:var(--bg-secondary);border-radius:var(--radius-sm);border:1px solid var(--border-grid)">
+      <span style="color:var(--text-muted);font-weight:500">자치구</span><span style="color:var(--text)">${gn}</span>
+      <span style="color:var(--text-muted);font-weight:500">단계</span><span style="color:var(--text)">${pn}</span>
+      <span style="color:var(--text-muted);font-weight:500">면적</span><span style="color:var(--text);font-family:var(--font-mono)">${am}</span>
+    </div>
+    <button onclick="hideFeature('${hp['PRESENT_SN']}')" style="margin-top:5px;padding:2px 8px;font-size:9px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg);color:var(--text-muted);cursor:pointer;font-weight:500;font-family:var(--font);transition:all .12s" onmouseover="this.style.borderColor='var(--danger)';this.style.color='var(--danger)'" onmouseout="this.style.borderColor='';this.style.color=''">\uc228\uae30\uae30</button>
   </div>`;
 }
 
