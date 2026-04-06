@@ -571,11 +571,14 @@ function buildPopupCard(hp) {
 // 겹침 hits 저장
 window._overlapHits = [];
 window._overlapLatLng = null;
+let sideMode = false; // 사이드 고정 모드
 
 function openOverlapPopup(latlng, hits) {
   if (highlightLayer) { map.removeLayer(highlightLayer); highlightLayer = null; }
   window._overlapHits = hits;
   window._overlapLatLng = latlng;
+  // 사이드 모드면 바로 사이드 패널로
+  if (sideMode) { pinToSide(); return; }
   highlightFeature(0);
   // 팝업으로 카드 나열 + 클릭 시 하이라이트 전환
   const cards = hits.map((h, idx) => {
@@ -612,6 +615,7 @@ function highlightFeature(idx) {
 
 // 팝업 → 사이드 패널
 function pinToSide() {
+  sideMode = true;
   map.closePopup();
   const panel = document.getElementById('detail-panel');
   const legend = document.getElementById('legend');
@@ -638,6 +642,7 @@ function pinToSide() {
 
 // 사이드 패널 → 팝업
 function sideToPopup() {
+  sideMode = false;
   closeSidePanel();
   if (window._overlapLatLng && window._overlapHits.length > 0) {
     openOverlapPopup(window._overlapLatLng, window._overlapHits);
@@ -646,6 +651,7 @@ function sideToPopup() {
 
 // 사이드 패널 닫기
 function closeSidePanel() {
+  sideMode = false;
   const panel = document.getElementById('detail-panel');
   panel.classList.remove('show');
   panel.innerHTML = '';
