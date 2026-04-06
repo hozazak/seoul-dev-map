@@ -618,6 +618,8 @@ function applyFilters() {
     if (!checkedGu.has(guName)) return false;
 
     const area = p['면적_m2'] || 0;
+    const areaFiltered = (areaMin > 0 || areaMax < AREA_MAX_LIMIT);
+    if (area <= 0 && areaFiltered) return false;
     if (area > 0) {
       if (area < areaMin) return false;
       if (areaMax < AREA_MAX_LIMIT && area > areaMax) return false;
