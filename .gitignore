@@ -24,3 +24,7 @@ output/*.png
 output/*.bak-*
 output/_plan_zone_block.html
 output/district_plan_data.js
+
+# docs/data는 GitHub Pages용이므로 포함
+!docs/data/
+!docs/data/**
