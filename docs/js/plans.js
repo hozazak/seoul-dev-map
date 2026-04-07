@@ -60,8 +60,16 @@ map.on('click', function(e) {
     }
   });
   if (zones.length === 0) return;
+  // 폴리곤 합산 bounds 상단 중앙에 팝업 (폴리곤 가림 방지)
+  var allCoords = zones.flatMap(function(f) {
+    var coords = f.geometry.coordinates;
+    var flat = f.geometry.type === 'MultiPolygon' ? coords.flat(2) : coords.flat(1);
+    return flat.map(function(c) { return [c[1], c[0]]; });
+  });
+  var allBounds = L.latLngBounds(allCoords);
+  var popupLatLng = L.latLng(allBounds.getNorth(), allBounds.getCenter().lng);
   var html = zones.map(function(f){ return planPopupHtml(f.properties); }).join('<hr style="border:none;border-top:1px solid #e0e0e0;margin:6px 0">');
-  L.popup({maxWidth:300}).setLatLng(e.latlng).setContent(html).openOn(map);
+  L.popup({maxWidth:300}).setLatLng(popupLatLng).setContent(html).openOn(map);
 });
 
 var dToggle = document.getElementById('toggle-district-plan');
