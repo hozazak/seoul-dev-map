@@ -212,7 +212,7 @@ body { font-family: var(--font); color: var(--text); -webkit-font-smoothing: ant
 .plan-zone-toggle { margin-top: 8px; display: flex; flex-direction: column; gap: 4px; }
 .plan-zone-toggle label { display: flex; align-items: center; gap: 6px; font-size: 13px; cursor: pointer; }
 .plan-zone-toggle .zone-swatch { display: inline-block; width: 18px; height: 12px; border-radius: 2px; flex-shrink: 0; }
-.plan-zone-toggle .zone-swatch.district { border: 2px dashed #7c3aed; background: rgba(124,58,237,0.08); }
+.plan-zone-toggle .zone-swatch.district { border: 2px dashed #1a73e8; background: rgba(124,58,237,0.08); }
 .plan-zone-toggle .zone-swatch.special { border: 2px dashed #c0392b; background: rgba(192,57,43,0.08); }
 
 /* 면적 필터 */
@@ -736,7 +736,7 @@ function _planZoneBadges(latlng) {
   const zones = _findPlanZones(latlng);
   if (zones.length === 0) return '';
   return zones.map(function(z) {
-    var color = z.type === '지구단위계획구역' ? '#7c3aed' : '#c0392b';
+    var color = z.type === '지구단위계획구역' ? '#1a73e8' : '#c0392b';
     var label = z.name || z.type;
     return '<span style="display:inline-block;background:' + color + '14;color:' + color + ';border:1px solid ' + color + '40;border-radius:3px;padding:1px 7px;font-size:11px;font-weight:600;letter-spacing:0.01em;margin-right:4px;margin-bottom:2px">' + label + '</span>';
   }).join('') + '<div style="height:6px"></div>';
@@ -1078,7 +1078,7 @@ map.getPane('planZoneVisual').style.pointerEvents = 'none';
 
 function planPopupHtml(p) {
   var type = p['\uc720\ud615'];
-  var color = type === '\uc9c0\uad6c\ub2e8\uc704\uacc4\ud68d\uad6c\uc5ed' ? '#7c3aed' : '#c0392b';
+  var color = type === '\uc9c0\uad6c\ub2e8\uc704\uacc4\ud68d\uad6c\uc5ed' ? '#1a73e8' : '#c0392b';
   var area = p['\uba74\uc801_m2'] ? Math.round(p['\uba74\uc801_m2']).toLocaleString('ko-KR') + ' \u33a1' : '-';
   var date = p['\uc9c0\uc815\uc77c'] || '-';
   return '<div style="font-family:var(--font);max-width:280px">'
@@ -1095,7 +1095,7 @@ function planPopupHtml(p) {
 var districtVisual = L.geoJSON(null, {
   pane: 'planZoneVisual',
   filter: function(f){ return f.properties['\uc720\ud615'] === '\uc9c0\uad6c\ub2e8\uc704\uacc4\ud68d\uad6c\uc5ed'; },
-  style: { color: '#7c3aed', weight: 1.5, dashArray: '6 4', fillColor: '#7c3aed', fillOpacity: 0.05, interactive: false }
+  style: { color: '#1a73e8', weight: 1.5, dashArray: '6 4', fillColor: '#1a73e8', fillOpacity: 0.05, interactive: false }
 });
 var specialVisual = L.geoJSON(null, {
   pane: 'planZoneVisual',

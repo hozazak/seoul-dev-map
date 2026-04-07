@@ -29,7 +29,7 @@ map.getPane('planZoneVisual').style.pointerEvents = 'none';
 
 function planPopupHtml(p) {
   var type = p['\uc720\ud615'];
-  var color = type === '\uc9c0\uad6c\ub2e8\uc704\uacc4\ud68d\uad6c\uc5ed' ? '#7c3aed' : '#c0392b';
+  var color = type === '\uc9c0\uad6c\ub2e8\uc704\uacc4\ud68d\uad6c\uc5ed' ? '#1a73e8' : '#c0392b';
   var area = p['\uba74\uc801_m2'] ? Math.round(p['\uba74\uc801_m2']).toLocaleString('ko-KR') + ' \u33a1' : '-';
   var date = p['\uc9c0\uc815\uc77c'] || '-';
   return '<div style="font-family:var(--font);max-width:280px">'
@@ -46,7 +46,7 @@ function planPopupHtml(p) {
 var districtVisual = L.geoJSON(null, {
   pane: 'planZoneVisual',
   filter: function(f){ return f.properties['\uc720\ud615'] === '\uc9c0\uad6c\ub2e8\uc704\uacc4\ud68d\uad6c\uc5ed'; },
-  style: { color: '#7c3aed', weight: 1.5, dashArray: '6 4', fillColor: '#7c3aed', fillOpacity: 0.05, interactive: false }
+  style: { color: '#1a73e8', weight: 1.5, dashArray: '6 4', fillColor: '#1a73e8', fillOpacity: 0.05, interactive: false }
 });
 var specialVisual = L.geoJSON(null, {
   pane: 'planZoneVisual',
