@@ -759,7 +759,6 @@ function _renderSelectionPanel() {
     const typeName = _BZ_MAP[typeCode] || typeCode || '-';
     const stageCode = p['추진단계'] || '';
     const stageName = _PP_MAP[stageCode] || stageCode || '-';
-    const loc = [p['자치구'], p['사업명']].filter(Boolean).join(' ') || '정보 없음';
     const snEsc = escapeHtml(item.sn);
     return `<div class="sel-item">
       <div class="sel-item-header">
@@ -771,7 +770,6 @@ function _renderSelectionPanel() {
         <span class="meta-key">면적</span><span class="meta-val" style="font-family:var(--font-mono)">${m2} (${pyeong})</span>
         <span class="meta-key">유형</span><span class="meta-val">${escapeHtml(typeName)}</span>
         <span class="meta-key">단계</span><span class="meta-val">${escapeHtml(stageName)}</span>
-        <span class="meta-key">위치</span><span class="meta-val">${escapeHtml(loc)}</span>
       </div>
     </div>`;
   }).join('');
