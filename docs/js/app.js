@@ -869,9 +869,12 @@ function openSelectionChoicePopup(latlng, hits) {
 // ─── Fix 3: 레전드 토글 시 선택 패널/버튼 위치 조정 ──────────────────────────
 function _updateSelectionPanelPos() {
   const collapsed = document.getElementById('legend').classList.contains('collapsed');
-  const right = collapsed ? 'var(--sp-3)' : 'calc(320px + var(--sp-3) * 2)';
-  document.getElementById('selection-panel').style.right = right;
-  document.getElementById('selection-mode-btn').style.right = right;
+  // 레전드 열림: 레전드 왼쪽에 배치
+  // 레전드 닫힘: 필터 열기 버튼(☰) 왼쪽에 배치 (겹침 방지)
+  const btnRight = collapsed ? 'calc(var(--sp-3) + 70px)' : 'calc(320px + var(--sp-3) * 2)';
+  const panelRight = collapsed ? 'var(--sp-3)' : 'calc(320px + var(--sp-3) * 2)';
+  document.getElementById('selection-panel').style.right = panelRight;
+  document.getElementById('selection-mode-btn').style.right = btnRight;
 }
 new MutationObserver(_updateSelectionPanelPos)
   .observe(document.getElementById('legend'), { attributes: true, attributeFilter: ['class'] });
