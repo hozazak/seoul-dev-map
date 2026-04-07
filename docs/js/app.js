@@ -365,7 +365,6 @@ function buildPopupCard(hp) {
 // 겹침 hits 저장
 window._overlapHits = [];
 window._overlapLatLng = null;
-let sideMode = false; // 사이드 고정 모드
 
 // 클릭 지점의 도시계획구역 포함 여부 검사
 function _findPlanZones(latlng) {
@@ -394,8 +393,6 @@ function openOverlapPopup(latlng, hits) {
   window._overlapHits = hits;
   window._overlapLatLng = latlng;
   window._planZoneBadgeHtml = _planZoneBadges(latlng);
-  // 사이드 모드면 바로 사이드 패널로
-  if (sideMode) { pinToSide(); return; }
   highlightFeature(0);
   // 팝업으로 카드 나열 + 클릭 시 하이라이트 전환
   const cards = hits.map((h, idx) => {
@@ -406,7 +403,6 @@ function openOverlapPopup(latlng, hits) {
     </div>`;
   }).join('');
   const header = hits.length > 1 ? `<div style="font-size:12px;color:var(--warning);font-weight:600;margin-bottom:6px;letter-spacing:0.01em">${hits.length}\uac74 \uacb9\uce68 \u2014 \uce74\ub4dc\ub97c \ub20c\ub7ec \uc678\uacfd\uc120 \ud655\uc778</div>` : '';
-  const pinBtn = `<div style="text-align:right;margin-top:var(--sp-2)"><button onclick="pinToSide()" class="popup-pin-btn">\uc0ac\uc774\ub4dc \uace0\uc815</button></div>`;
   // 폴리곤 합산 bounds 상단 중앙에 팝업 (폴리곤 가림 방지)
   const allBounds = L.latLngBounds(hits.flatMap(h => {
     const coords = h.geometry.coordinates;
@@ -414,7 +410,7 @@ function openOverlapPopup(latlng, hits) {
     return flat.map(c => [c[1], c[0]]);
   }));
   const popupLatLng = L.latLng(allBounds.getNorth(), allBounds.getCenter().lng);
-  L.popup({maxWidth:420,maxHeight:400,autoPan:false}).setLatLng(popupLatLng).setContent(window._planZoneBadgeHtml + header + cards + pinBtn).openOn(map);
+  L.popup({maxWidth:420,maxHeight:400,autoPan:false}).setLatLng(popupLatLng).setContent(window._planZoneBadgeHtml + header + cards).openOn(map);
 }
 
 function highlightFeature(idx) {
@@ -431,56 +427,8 @@ function highlightFeature(idx) {
   });
   const el = document.getElementById('overlap-card-' + idx);
   if (el) el.classList.add('hl-active');
-  // 사이드 패널 카드 선택 표시
-  document.querySelectorAll('#detail-panel .detail-card').forEach((el, i) => {
-    el.classList.toggle('active', i === idx);
-  });
 }
 
-// 팝업 → 사이드 패널
-function pinToSide() {
-  sideMode = true;
-  map.closePopup();
-  const panel = document.getElementById('detail-panel');
-  const legend = document.getElementById('legend');
-  // 레전드 열기
-  if (legend.classList.contains('collapsed')) {
-    legend.classList.remove('collapsed');
-    document.getElementById('legend-toggle').style.display = 'none';
-  }
-  const hits = window._overlapHits;
-  const header = hits.length > 1
-    ? `<div class="detail-header"><span>${hits.length}\uac74 \uacb9\uce68</span><button onclick="closeSidePanel()" title="\ub2eb\uae30">\u2715</button></div>`
-    : `<div class="detail-header"><span>\uc0ac\uc5c5 \uc0c1\uc138</span><button onclick="closeSidePanel()" title="\ub2eb\uae30">\u2715</button></div>`;
-  const cards = hits.map((h, idx) => {
-    return `<div class="detail-card${idx===0?' active':''}" onclick="highlightFeature(${idx})">
-      ${buildPopupCard(h.props).replace(/^<div[^>]*>/,'').replace(/<\/div>$/,'')}
-    </div>`;
-  }).join('');
-  const popupBtn = `<div style="text-align:right;margin-top:var(--sp-2)"><button onclick="sideToPopup()" class="popup-pin-btn">\ud31d\uc5c5\uc73c\ub85c</button></div>`;
-  panel.innerHTML = (window._planZoneBadgeHtml || '') + header + cards + popupBtn;
-  panel.classList.add('show');
-  // 첫 항목 하이라이트 유지
-  highlightFeature(0);
-}
-
-// 사이드 패널 → 팝업
-function sideToPopup() {
-  sideMode = false;
-  closeSidePanel();
-  if (window._overlapLatLng && window._overlapHits.length > 0) {
-    openOverlapPopup(window._overlapLatLng, window._overlapHits);
-  }
-}
-
-// 사이드 패널 닫기
-function closeSidePanel() {
-  sideMode = false;
-  const panel = document.getElementById('detail-panel');
-  panel.classList.remove('show');
-  panel.innerHTML = '';
-  if (highlightLayer) { map.removeLayer(highlightLayer); highlightLayer = null; }
-}
 
 /* ── point-in-polygon (ray casting) ── */
 function _pointInRing(x, y, ring) {
