@@ -437,3 +437,19 @@ body { font-family: var(--font); color: var(--text); -webkit-font-smoothing: ant
 }
 #screenshot-btn:hover { background: var(--bg-hover); border-color: var(--accent); color: var(--accent); }
 #screenshot-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* === 선택 모드 겹침 팝업 === */
+.overlap-sel-popup { min-width: 180px; }
+.overlap-sel-title {
+  font-size: 12px; font-weight: 600; color: var(--text-muted);
+  margin-bottom: 6px; padding-bottom: 6px;
+  border-bottom: 1px solid var(--border-grid);
+}
+.overlap-sel-item {
+  padding: 5px 8px; font-size: 13px; cursor: pointer;
+  border-radius: var(--radius-sm); color: var(--text);
+  transition: background 0.1s;
+}
+.overlap-sel-item:hover { background: var(--bg-hover); }
+.overlap-sel-item.sel-active { color: var(--accent); font-weight: 500; }
+.overlap-sel-badge { font-size: 11px; color: var(--accent); font-weight: 600; }

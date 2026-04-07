@@ -511,8 +511,27 @@ function onEachFeature(feature, layer) {
   layer.on('click', function(e) {
     L.DomEvent.stopPropagation(e);
     if (selectionMode) {
-      const sn = p['PRESENT_SN'];
-      if (sn) toggleSelectedFeature(sn, p, feature.geometry);
+      const latlng = e.latlng;
+      const hits = [];
+      const seen = new Set();
+      allLayers.forEach(item => {
+        if (!item.layer._map) return;
+        try {
+          if (item.layer.getBounds && item.layer.getBounds().contains(latlng)) {
+            if (_pointInGeometry(latlng.lng, latlng.lat, item.geometry)) {
+              const sn = item.props['PRESENT_SN'];
+              if (!seen.has(sn)) { seen.add(sn); hits.push({ sn, props: item.props, geometry: item.geometry }); }
+            }
+          }
+        } catch(ex) {}
+      });
+      if (hits.length === 0) hits.push({ sn: p['PRESENT_SN'], props: p, geometry: feature.geometry });
+      if (hits.length === 1) {
+        const h = hits[0];
+        if (h.sn) toggleSelectedFeature(h.sn, h.props, h.geometry);
+      } else {
+        openSelectionChoicePopup(latlng, hits);
+      }
       return;
     }
     const latlng = e.latlng;
@@ -740,7 +759,7 @@ function _renderSelectionPanel() {
     const typeName = _BZ_MAP[typeCode] || typeCode || '-';
     const stageCode = p['추진단계'] || '';
     const stageName = _PP_MAP[stageCode] || stageCode || '-';
-    const addr = p['주소'] || '정보 없음';
+    const loc = [p['자치구'], p['사업명']].filter(Boolean).join(' ') || '정보 없음';
     const snEsc = escapeHtml(item.sn);
     return `<div class="sel-item">
       <div class="sel-item-header">
@@ -752,7 +771,7 @@ function _renderSelectionPanel() {
         <span class="meta-key">면적</span><span class="meta-val" style="font-family:var(--font-mono)">${m2} (${pyeong})</span>
         <span class="meta-key">유형</span><span class="meta-val">${escapeHtml(typeName)}</span>
         <span class="meta-key">단계</span><span class="meta-val">${escapeHtml(stageName)}</span>
-        <span class="meta-key">주소</span><span class="meta-val">${escapeHtml(addr)}</span>
+        <span class="meta-key">위치</span><span class="meta-val">${escapeHtml(loc)}</span>
       </div>
     </div>`;
   }).join('');
@@ -819,6 +838,45 @@ window.takeScreenshot = async function() {
   btn.textContent = orig;
   btn.disabled = false;
 };
+
+// ─── 선택 모드: 겹치는 필지 선택 팝업 ────────────────────────────────────────
+function openSelectionChoicePopup(latlng, hits) {
+  const popupEl = document.createElement('div');
+  popupEl.className = 'overlap-sel-popup';
+
+  function renderList() {
+    popupEl.innerHTML = '<div class="overlap-sel-title">어떤 사업을 선택하시겠습니까?</div>' +
+      hits.map((h, i) => {
+        const isSelected = selectedItems.some(item => item.sn === h.sn);
+        const name = escapeHtml(h.props['사업명'] || h.sn || '-');
+        return `<div class="overlap-sel-item${isSelected ? ' sel-active' : ''}" data-idx="${i}">
+          ${name}${isSelected ? ' <span class="overlap-sel-badge">(선택됨)</span>' : ''}
+        </div>`;
+      }).join('');
+    popupEl.querySelectorAll('.overlap-sel-item').forEach(el => {
+      el.addEventListener('click', () => {
+        const h = hits[parseInt(el.dataset.idx)];
+        if (h.sn) { toggleSelectedFeature(h.sn, h.props, h.geometry); renderList(); }
+      });
+    });
+  }
+
+  renderList();
+  L.popup({ maxWidth: 300, minWidth: 200, className: 'overlap-sel-leaflet-popup' })
+    .setLatLng(latlng)
+    .setContent(popupEl)
+    .openOn(map);
+}
+
+// ─── Fix 3: 레전드 토글 시 선택 패널/버튼 위치 조정 ──────────────────────────
+function _updateSelectionPanelPos() {
+  const collapsed = document.getElementById('legend').classList.contains('collapsed');
+  const right = collapsed ? 'var(--sp-3)' : 'calc(320px + var(--sp-3) * 2)';
+  document.getElementById('selection-panel').style.right = right;
+  document.getElementById('selection-mode-btn').style.right = right;
+}
+new MutationObserver(_updateSelectionPanelPos)
+  .observe(document.getElementById('legend'), { attributes: true, attributeFilter: ['class'] });
 
 applyFilters();
 }
