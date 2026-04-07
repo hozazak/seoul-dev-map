@@ -425,16 +425,21 @@ GEOJSON.features.forEach(feat => {
 });
 
 const allTypeCodes = TYPE_GROUPS.flatMap(group => group.children.map(child => child.code));
-// 기본 필터: 체크할 사업유형만 명시 (나머지 해제)
+// 기본 필터: 아래 항목만 체크, 나머지 전부 해제
 const _DEFAULT_ON_TYPES = new Set([
-  'BZ101','BZ102','BZ103','BZ104','BZ105','BZ107','BZ108', // 정비사업 전체
-  'BZ302','BZ303',       // 역세권활성화, 청년안심주택
-  'BZ402',               // 재정비촉진구역
-  'BZ501','BZ502',       // 공공주택지구조성, 도심공공주택복합
-  'BZ601','BZ604','BZ606' // 도시개발사업, 도시재생활성화, 사전협상제
+  'BZ101',  // 신속통합기획
+  'BZ102',  // 재개발(도시정비형)
+  'BZ103',  // 재개발(주택정비형)
+  'BZ104',  // 재건축(단독)
+  'BZ105',  // 재건축(공동)
+  'BZ302',  // 역세권활성화
+  'BZ402',  // 재정비촉진구역
+  'BZ501',  // 공공주택지구조성
+  'BZ502',  // 도심공공주택복합
+  'BZ601',  // 도시개발사업
+  'BZ606',  // 사전협상제
 ]);
 let checkedTypes = new Set(allTypeCodes.filter(c => _DEFAULT_ON_TYPES.has(c)));
-// 기본 필터: 계획/기획, 심의/인가만 체크
 const _DEFAULT_ON_STAGES = new Set(['계획/기획','심의/인가']);
 let checkedStages = new Set(Object.keys(STAGE_GROUPS).filter(s => _DEFAULT_ON_STAGES.has(s)));
 let checkedGu = new Set(GU_LIST);
