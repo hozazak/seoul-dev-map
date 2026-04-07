@@ -631,7 +631,13 @@ function renderTypeFilters() {
         if (input.checked) checkedTypes.add(child.code);
         else checkedTypes.delete(child.code);
       });
-      renderTypeFilters();
+      // 하위 체크박스만 동기화 (DOM 전체 재렌더 X → 카드 닫힘 방지)
+      const groupEl = input.closest('.type-group');
+      if (groupEl) {
+        groupEl.querySelectorAll('.type-child').forEach(cb => {
+          cb.checked = input.checked;
+        });
+      }
       updateMasterCheckbox('type-all', checkedTypes.size, allTypeCodes.length);
       applyFilters();
     });
