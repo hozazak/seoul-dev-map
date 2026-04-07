@@ -14,14 +14,26 @@
 <body>
 <div id="map"></div>
 <div id="controls">
-  <input type="text" id="search" placeholder="사업명, 자치구 검색..."/>
+  <div class="controls-header">
+    <div class="controls-logo">
+      <svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="4" height="4" rx="1"/><rect x="7" y="1" width="4" height="4" rx="1"/><rect x="1" y="7" width="4" height="4" rx="1"/><rect x="7" y="7" width="4" height="4" rx="1"/></svg>
+    </div>
+    <div>
+      <div class="controls-title">서울 도시계획사업</div>
+      <div class="controls-subtitle">서울도시공간포털 UPIS</div>
+    </div>
+  </div>
+  <div class="search-wrap">
+    <span class="search-icon">⌕</span>
+    <input type="text" id="search" placeholder="사업명, 자치구 검색..."/>
+  </div>
   <div id="counter">전체 2906건 표시 중</div>
 </div>
-<button id="legend-toggle" onclick="document.getElementById('legend').classList.remove('collapsed');this.style.display='none'">☰ 필터</button>
-<button id="selection-mode-btn" onclick="toggleSelectionMode()" title="선택 모드 켜기 — 필지 클릭하면 선택됩니다">📌 선택 모드</button>
+<button id="legend-toggle" onclick="document.getElementById('legend').classList.remove('collapsed');this.style.display='none'">필터 열기</button>
+<button id="selection-mode-btn" onclick="toggleSelectionMode()" title="선택 모드 켜기 — 필지 클릭하면 선택됩니다">선택 모드</button>
 <div id="selection-panel">
   <div class="sel-header">
-    <span class="sel-header-title">📌 선택 필지</span>
+    <span class="sel-header-title">선택 필지</span>
     <button class="sel-clear-btn" onclick="clearAllSelected()">전체 해제</button>
   </div>
   <div id="sel-summary"></div>
@@ -107,7 +119,7 @@
   </div>
 
   <div class="screenshot-wrap">
-    <button id="screenshot-btn" onclick="takeScreenshot()">📷 스크린샷</button>
+    <button id="screenshot-btn" onclick="takeScreenshot()">스크린샷 저장</button>
   </div>
 </div>
 
