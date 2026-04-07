@@ -407,7 +407,14 @@ function openOverlapPopup(latlng, hits) {
   }).join('');
   const header = hits.length > 1 ? `<div style="font-size:12px;color:var(--warning);font-weight:600;margin-bottom:6px;letter-spacing:0.01em">${hits.length}\uac74 \uacb9\uce68 \u2014 \uce74\ub4dc\ub97c \ub20c\ub7ec \uc678\uacfd\uc120 \ud655\uc778</div>` : '';
   const pinBtn = `<div style="text-align:right;margin-top:var(--sp-2)"><button onclick="pinToSide()" class="popup-pin-btn">\uc0ac\uc774\ub4dc \uace0\uc815</button></div>`;
-  L.popup({maxWidth:420,maxHeight:400,autoPan:false}).setLatLng(latlng).setContent(window._planZoneBadgeHtml + header + cards + pinBtn).openOn(map);
+  // 폴리곤 합산 bounds 상단 중앙에 팝업 (폴리곤 가림 방지)
+  const allBounds = L.latLngBounds(hits.flatMap(h => {
+    const coords = h.geometry.coordinates;
+    const flat = h.geometry.type === 'MultiPolygon' ? coords.flat(2) : coords.flat(1);
+    return flat.map(c => [c[1], c[0]]);
+  }));
+  const popupLatLng = L.latLng(allBounds.getNorth(), allBounds.getCenter().lng);
+  L.popup({maxWidth:420,maxHeight:400,autoPan:false}).setLatLng(popupLatLng).setContent(window._planZoneBadgeHtml + header + cards + pinBtn).openOn(map);
 }
 
 function highlightFeature(idx) {

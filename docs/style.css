@@ -841,6 +841,12 @@ body {
 /* ──────────────────────────────────────────
    Leaflet 팝업 오버라이드 — 프리미엄
 ────────────────────────────────────────── */
+.leaflet-popup {
+  z-index: 1100 !important;
+}
+.leaflet-popup-pane {
+  z-index: 1100 !important;
+}
 .leaflet-popup-content-wrapper {
   border-radius: var(--radius-lg) !important;
   box-shadow: var(--shadow-float) !important;
