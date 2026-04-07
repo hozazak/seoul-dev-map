@@ -757,12 +757,11 @@ window.focusSelectedFeature = function(sn) {
   const flat = item.geometry.type === 'MultiPolygon' ? coords.flat(2) : coords.flat(1);
   const bounds = L.latLngBounds(flat.map(c => [c[1], c[0]]));
   map.flyToBounds(bounds, { padding: [80, 80], maxZoom: 17, duration: 0.6 });
-  // 일시적 강조 효과
+  // 포커스 강조 효과 (기존 포커스 제거 후 새로 표시)
   if (highlightLayer) { map.removeLayer(highlightLayer); highlightLayer = null; }
   highlightLayer = L.geoJSON({ type: 'Feature', geometry: item.geometry }, {
     style: { color: '#2c5ea0', weight: 4, fillOpacity: 0, dashArray: '10,5' }, interactive: false
   }).addTo(map);
-  setTimeout(() => { if (highlightLayer) { map.removeLayer(highlightLayer); highlightLayer = null; } }, 3000);
 };
 
 window.removeSelectedFeature = function(sn) {
