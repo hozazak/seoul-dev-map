@@ -530,7 +530,14 @@ function onEachFeature(feature, layer) {
         const h = hits[0];
         if (h.sn) toggleSelectedFeature(h.sn, h.props, h.geometry);
       } else {
-        openSelectionChoicePopup(latlng, hits);
+        // 겹치는 폴리곤들의 합산 bounds 상단 중앙에 팝업
+        const allBounds = L.latLngBounds(hits.flatMap(h => {
+          const coords = h.geometry.coordinates;
+          const flat = h.geometry.type === 'MultiPolygon' ? coords.flat(2) : coords.flat(1);
+          return flat.map(c => [c[1], c[0]]);
+        }));
+        const topCenter = L.latLng(allBounds.getNorth(), allBounds.getCenter().lng);
+        openSelectionChoicePopup(topCenter, hits);
       }
       return;
     }
