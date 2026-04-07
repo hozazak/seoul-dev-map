@@ -425,12 +425,18 @@ GEOJSON.features.forEach(feat => {
 });
 
 const allTypeCodes = TYPE_GROUPS.flatMap(group => group.children.map(child => child.code));
-// 기본 필터: 소규모정비 전체 해제, 어르신안심/신혼부부안심 해제, 공동주택리모델링 해제
-const _DEFAULT_OFF_TYPES = new Set(['BZ201','BZ202','BZ203','BZ204','BZ205','BZ304','BZ305','BZ602']);
-let checkedTypes = new Set(allTypeCodes.filter(c => !_DEFAULT_OFF_TYPES.has(c)));
-// 기본 필터: 취소/중단 해제
-const _DEFAULT_OFF_STAGES = new Set(['취소/중단']);
-let checkedStages = new Set(Object.keys(STAGE_GROUPS).filter(s => !_DEFAULT_OFF_STAGES.has(s)));
+// 기본 필터: 체크할 사업유형만 명시 (나머지 해제)
+const _DEFAULT_ON_TYPES = new Set([
+  'BZ101','BZ102','BZ103','BZ104','BZ105','BZ107','BZ108', // 정비사업 전체
+  'BZ302','BZ303',       // 역세권활성화, 청년안심주택
+  'BZ402',               // 재정비촉진구역
+  'BZ501','BZ502',       // 공공주택지구조성, 도심공공주택복합
+  'BZ601','BZ604','BZ606' // 도시개발사업, 도시재생활성화, 사전협상제
+]);
+let checkedTypes = new Set(allTypeCodes.filter(c => _DEFAULT_ON_TYPES.has(c)));
+// 기본 필터: 계획/기획, 심의/인가만 체크
+const _DEFAULT_ON_STAGES = new Set(['계획/기획','심의/인가']);
+let checkedStages = new Set(Object.keys(STAGE_GROUPS).filter(s => _DEFAULT_ON_STAGES.has(s)));
 let checkedGu = new Set(GU_LIST);
 let allLayers = [];
 let geojsonLayer;
