@@ -720,10 +720,10 @@ function _renderSelectionPanel() {
     const stageCode = p['추진단계'] || '';
     const stageName = _PP_MAP[stageCode] || stageCode || '-';
     const snEsc = escapeHtml(item.sn);
-    return `<div class="sel-item">
+    return `<div class="sel-item" onclick="focusSelectedFeature('${snEsc}')" style="cursor:pointer">
       <div class="sel-item-header">
         <div class="sel-item-name">${escapeHtml(name)}</div>
-        <button class="sel-remove-btn" onclick="removeSelectedFeature('${snEsc}')" title="선택 해제">✕</button>
+        <button class="sel-remove-btn" onclick="event.stopPropagation();removeSelectedFeature('${snEsc}')" title="선택 해제">✕</button>
       </div>
       <div class="sel-item-meta">
         <span class="meta-key">자치구</span><span class="meta-val">${escapeHtml(gu)}</span>
@@ -749,6 +749,21 @@ function toggleSelectedFeature(sn, props, geometry) {
   }
   _renderSelectionPanel();
 }
+
+window.focusSelectedFeature = function(sn) {
+  const item = selectedItems.find(i => i.sn === sn);
+  if (!item) return;
+  const coords = item.geometry.coordinates;
+  const flat = item.geometry.type === 'MultiPolygon' ? coords.flat(2) : coords.flat(1);
+  const bounds = L.latLngBounds(flat.map(c => [c[1], c[0]]));
+  map.flyToBounds(bounds, { padding: [80, 80], maxZoom: 17, duration: 0.6 });
+  // 일시적 강조 효과
+  if (highlightLayer) { map.removeLayer(highlightLayer); highlightLayer = null; }
+  highlightLayer = L.geoJSON({ type: 'Feature', geometry: item.geometry }, {
+    style: { color: '#2c5ea0', weight: 4, fillOpacity: 0, dashArray: '10,5' }, interactive: false
+  }).addTo(map);
+  setTimeout(() => { if (highlightLayer) { map.removeLayer(highlightLayer); highlightLayer = null; } }, 3000);
+};
 
 window.removeSelectedFeature = function(sn) {
   const idx = selectedItems.findIndex(item => item.sn === sn);
