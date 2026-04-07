@@ -768,7 +768,7 @@ function highlightFeature(idx) {
   if (!hit) return;
   if (highlightLayer) { map.removeLayer(highlightLayer); highlightLayer = null; }
   highlightLayer = L.geoJSON(hit.geometry, {
-    style: { color: '#2c5ea0', weight: 2.5, fillOpacity: 0, dashArray: '8,4' }, interactive: false
+    style: { color: '#2c5ea0', weight: 4, fillOpacity: 0, dashArray: '10,5' }, interactive: false
   }).addTo(map);
   // 팝업 카드 선택 표시
   document.querySelectorAll('[id^=overlap-card-]').forEach((el, i) => {
