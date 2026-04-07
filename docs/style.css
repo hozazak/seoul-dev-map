@@ -1318,3 +1318,91 @@ body {
   padding: 2px 6px !important;
   color: var(--text-muted) !important;
 }
+
+/* ──────────────────────────────────────────
+   모바일 반응형
+────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* 검색 패널 */
+  #controls {
+    left: var(--sp-2);
+    right: var(--sp-2);
+    max-width: none;
+    top: var(--sp-2);
+  }
+  .controls-header { gap: var(--sp-2); }
+  .controls-title { font-size: 11px; }
+  .controls-subtitle { display: none; }
+
+  /* 레전드: 하단 시트 스타일 */
+  #legend {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: none;
+    min-width: auto;
+    max-height: 55vh;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    padding: var(--sp-3) var(--sp-4);
+    z-index: 1100;
+  }
+  #legend.collapsed {
+    max-height: 0 !important;
+    padding: 0 var(--sp-4);
+  }
+
+  /* 레전드 토글 */
+  #legend-toggle {
+    position: fixed;
+    bottom: var(--sp-3);
+    right: var(--sp-3);
+    top: auto;
+    z-index: 1050;
+  }
+  #legend-close {
+    top: var(--sp-2);
+    right: var(--sp-3);
+  }
+
+  /* 자치구 그리드 */
+  .gu-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3px 8px;
+  }
+
+  /* 선택 모드 버튼 */
+  #selection-mode-btn {
+    top: auto;
+    bottom: var(--sp-3);
+    left: var(--sp-3);
+    right: auto;
+    z-index: 1050;
+  }
+
+  /* 선택 패널 */
+  #selection-panel {
+    position: fixed;
+    top: auto;
+    bottom: 50px;
+    left: var(--sp-2);
+    right: var(--sp-2);
+    max-width: none;
+    max-height: 40vh;
+    z-index: 1100;
+  }
+
+  /* 면적 프리셋 */
+  .area-presets { gap: 3px; }
+  .area-preset-btn { padding: 4px var(--sp-2); font-size: 11px; }
+
+  /* 팝업 */
+  .leaflet-popup-content-wrapper {
+    max-width: 280px !important;
+  }
+  .leaflet-popup-content {
+    margin: var(--sp-3) !important;
+    font-size: 12px !important;
+  }
+}
