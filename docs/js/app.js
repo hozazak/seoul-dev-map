@@ -758,10 +758,8 @@ function _renderSelectionPanel() {
   }
   panel.classList.add('show');
 
-  const totalAreaM2 = selectedItems.reduce((s, item) => s + (item.props['면적_m2'] || 0), 0);
-  const totalPyeong = Math.round(totalAreaM2 * 0.3025);
   document.getElementById('sel-summary').innerHTML =
-    `총 <strong>${selectedItems.length}건</strong> · 합산 <strong>${Math.round(totalAreaM2).toLocaleString('ko-KR')}㎡</strong> (약 <strong>${totalPyeong.toLocaleString('ko-KR')}평</strong>)`;
+    `총 <strong>${selectedItems.length}건</strong> 선택`;
 
   document.getElementById('sel-list').innerHTML = selectedItems.map(item => {
     const p = item.props;
