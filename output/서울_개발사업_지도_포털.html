@@ -425,8 +425,12 @@ GEOJSON.features.forEach(feat => {
 });
 
 const allTypeCodes = TYPE_GROUPS.flatMap(group => group.children.map(child => child.code));
-let checkedTypes = new Set(allTypeCodes);
-let checkedStages = new Set(Object.keys(STAGE_GROUPS));
+// 기본 필터: 소규모정비 전체 해제, 어르신안심/신혼부부안심 해제, 공동주택리모델링 해제
+const _DEFAULT_OFF_TYPES = new Set(['BZ201','BZ202','BZ203','BZ204','BZ205','BZ304','BZ305','BZ602']);
+let checkedTypes = new Set(allTypeCodes.filter(c => !_DEFAULT_OFF_TYPES.has(c)));
+// 기본 필터: 취소/중단 해제
+const _DEFAULT_OFF_STAGES = new Set(['취소/중단']);
+let checkedStages = new Set(Object.keys(STAGE_GROUPS).filter(s => !_DEFAULT_OFF_STAGES.has(s)));
 let checkedGu = new Set(GU_LIST);
 let allLayers = [];
 let geojsonLayer;
