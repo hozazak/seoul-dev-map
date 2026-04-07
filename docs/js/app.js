@@ -74,6 +74,9 @@ let highlightLayer = null; // 클릭 하이라이트
 let areaMin = 0;
 let areaMax = 500000;
 const AREA_MAX_LIMIT = 500000;
+let selectionMode = false;
+let selectedItems = []; // [{sn, props, geometry}]
+const selectedHighlightLayers = {}; // sn -> Leaflet layer
 
 const map = L.map('map').setView([37.5665, 126.978], 11);
   window.map = map;
@@ -507,6 +510,11 @@ function onEachFeature(feature, layer) {
   // 클릭 시 같은 사업명의 모든 트랙 표시
   layer.on('click', function(e) {
     L.DomEvent.stopPropagation(e);
+    if (selectionMode) {
+      const sn = p['PRESENT_SN'];
+      if (sn) toggleSelectedFeature(sn, p, feature.geometry);
+      return;
+    }
     const latlng = e.latlng;
     // point-in-polygon ray casting (정확한 겹침 감지)
     const hits = [];
@@ -707,6 +715,110 @@ document.querySelectorAll('.area-preset-btn').forEach(btn => {
     syncAreaUI(); applyFilters();
   });
 });
+
+// ─── Selection Mode ──────────────────────────────────────────────────────────
+function _renderSelectionPanel() {
+  const panel = document.getElementById('selection-panel');
+  if (selectedItems.length === 0) {
+    panel.classList.remove('show');
+    return;
+  }
+  panel.classList.add('show');
+
+  const totalAreaM2 = selectedItems.reduce((s, item) => s + (item.props['면적_m2'] || 0), 0);
+  const totalPyeong = Math.round(totalAreaM2 * 0.3025);
+  document.getElementById('sel-summary').innerHTML =
+    `총 <strong>${selectedItems.length}건</strong> · 합산 <strong>${Math.round(totalAreaM2).toLocaleString('ko-KR')}㎡</strong> (약 <strong>${totalPyeong.toLocaleString('ko-KR')}평</strong>)`;
+
+  document.getElementById('sel-list').innerHTML = selectedItems.map(item => {
+    const p = item.props;
+    const name = p['사업명'] || '-';
+    const gu = p['자치구'] || '-';
+    const m2 = p['면적_m2'] ? Math.round(p['면적_m2']).toLocaleString('ko-KR') + ' ㎡' : '-';
+    const pyeong = p['면적_m2'] ? Math.round(p['면적_m2'] * 0.3025).toLocaleString('ko-KR') + '평' : '-';
+    const typeCode = p['소분류'] || p['대분류'] || '';
+    const typeName = _BZ_MAP[typeCode] || typeCode || '-';
+    const stageCode = p['추진단계'] || '';
+    const stageName = _PP_MAP[stageCode] || stageCode || '-';
+    const addr = p['주소'] || '정보 없음';
+    const snEsc = escapeHtml(item.sn);
+    return `<div class="sel-item">
+      <div class="sel-item-header">
+        <div class="sel-item-name">${escapeHtml(name)}</div>
+        <button class="sel-remove-btn" onclick="removeSelectedFeature('${snEsc}')" title="선택 해제">✕</button>
+      </div>
+      <div class="sel-item-meta">
+        <span class="meta-key">자치구</span><span class="meta-val">${escapeHtml(gu)}</span>
+        <span class="meta-key">면적</span><span class="meta-val" style="font-family:var(--font-mono)">${m2} (${pyeong})</span>
+        <span class="meta-key">유형</span><span class="meta-val">${escapeHtml(typeName)}</span>
+        <span class="meta-key">단계</span><span class="meta-val">${escapeHtml(stageName)}</span>
+        <span class="meta-key">주소</span><span class="meta-val">${escapeHtml(addr)}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleSelectedFeature(sn, props, geometry) {
+  const idx = selectedItems.findIndex(item => item.sn === sn);
+  if (idx >= 0) {
+    selectedItems.splice(idx, 1);
+    if (selectedHighlightLayers[sn]) { map.removeLayer(selectedHighlightLayers[sn]); delete selectedHighlightLayers[sn]; }
+  } else {
+    selectedItems.push({ sn, props, geometry });
+    selectedHighlightLayers[sn] = L.geoJSON({ type: 'Feature', geometry }, {
+      style: { color: '#2c5ea0', weight: 3, fillColor: '#FFD700', fillOpacity: 0.25, dashArray: '8,4' },
+      interactive: false
+    }).addTo(map);
+  }
+  _renderSelectionPanel();
+}
+
+window.removeSelectedFeature = function(sn) {
+  const idx = selectedItems.findIndex(item => item.sn === sn);
+  if (idx >= 0) {
+    selectedItems.splice(idx, 1);
+    if (selectedHighlightLayers[sn]) { map.removeLayer(selectedHighlightLayers[sn]); delete selectedHighlightLayers[sn]; }
+  }
+  _renderSelectionPanel();
+};
+
+window.clearAllSelected = function() {
+  selectedItems.forEach(item => {
+    if (selectedHighlightLayers[item.sn]) { map.removeLayer(selectedHighlightLayers[item.sn]); delete selectedHighlightLayers[item.sn]; }
+  });
+  selectedItems.length = 0;
+  _renderSelectionPanel();
+};
+
+window.toggleSelectionMode = function() {
+  selectionMode = !selectionMode;
+  const btn = document.getElementById('selection-mode-btn');
+  btn.classList.toggle('active', selectionMode);
+  btn.title = selectionMode ? '선택 모드 끄기' : '선택 모드 켜기 — 필지 클릭하면 선택됩니다';
+};
+
+window.takeScreenshot = async function() {
+  if (typeof html2canvas === 'undefined') { alert('html2canvas 라이브러리를 불러오지 못했습니다.'); return; }
+  const btn = document.getElementById('screenshot-btn');
+  const orig = btn.textContent;
+  btn.textContent = '캡처 중...';
+  btn.disabled = true;
+  try {
+    const canvas = await html2canvas(document.body, { useCORS: true, allowTaint: true, logging: false, scale: window.devicePixelRatio || 1 });
+    const now = new Date();
+    const pad = n => String(n).padStart(2, '0');
+    const fname = `서울_개발사업_지도_${now.getFullYear()}${pad(now.getMonth()+1)}${pad(now.getDate())}_${pad(now.getHours())}${pad(now.getMinutes())}.png`;
+    const a = document.createElement('a');
+    a.download = fname;
+    a.href = canvas.toDataURL('image/png');
+    a.click();
+  } catch(err) {
+    console.error('Screenshot failed:', err);
+    alert('스크린샷 캡처에 실패했습니다.');
+  }
+  btn.textContent = orig;
+  btn.disabled = false;
+};
 
 applyFilters();
 }

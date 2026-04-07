@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,6 +18,15 @@
   <div id="counter">전체 2906건 표시 중</div>
 </div>
 <button id="legend-toggle" onclick="document.getElementById('legend').classList.remove('collapsed');this.style.display='none'">☰ 필터</button>
+<button id="selection-mode-btn" onclick="toggleSelectionMode()" title="선택 모드 켜기 — 필지 클릭하면 선택됩니다">📌 선택 모드</button>
+<div id="selection-panel">
+  <div class="sel-header">
+    <span class="sel-header-title">📌 선택 필지</span>
+    <button class="sel-clear-btn" onclick="clearAllSelected()">전체 해제</button>
+  </div>
+  <div id="sel-summary"></div>
+  <div id="sel-list"></div>
+</div>
 <div id="legend">  <button id="legend-close" onclick="this.parentElement.classList.add('collapsed');document.getElementById('legend-toggle').style.display='block'">✕</button>
   <div class="filter-section">
     <div class="color-mode-toggle">
@@ -94,6 +104,10 @@
       <span>전체선택</span>
     </label>
     <div id="gu-filters" class="gu-grid"></div>
+  </div>
+
+  <div class="screenshot-wrap">
+    <button id="screenshot-btn" onclick="takeScreenshot()">📷 스크린샷</button>
   </div>
 </div>
 
