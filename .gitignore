@@ -22,3 +22,5 @@ output/*.cpg
 output/*.zip
 output/*.png
 output/*.bak-*
+output/_plan_zone_block.html
+output/district_plan_data.js
