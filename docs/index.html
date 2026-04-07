@@ -782,6 +782,27 @@ function closeSidePanel() {
   if (highlightLayer) { map.removeLayer(highlightLayer); highlightLayer = null; }
 }
 
+/* ── point-in-polygon (ray casting) ── */
+function _pointInRing(x, y, ring) {
+  let inside = false;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const xi = ring[i][0], yi = ring[i][1];
+    const xj = ring[j][0], yj = ring[j][1];
+    if ((yi > y) !== (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) inside = !inside;
+  }
+  return inside;
+}
+function _pointInPolygon(x, y, coords) {
+  if (!_pointInRing(x, y, coords[0])) return false;
+  for (let h = 1; h < coords.length; h++) { if (_pointInRing(x, y, coords[h])) return false; }
+  return true;
+}
+function _pointInGeometry(lng, lat, geom) {
+  if (geom.type === 'Polygon') return _pointInPolygon(lng, lat, geom.coordinates);
+  if (geom.type === 'MultiPolygon') return geom.coordinates.some(c => _pointInPolygon(lng, lat, c));
+  return false;
+}
+
 function onEachFeature(feature, layer) {
   const p = feature.properties;
   const 면적 = p['면적_m2'] ? (p['면적_m2'] / 10000).toFixed(2) + ' ha' : '-';
@@ -796,15 +817,18 @@ function onEachFeature(feature, layer) {
   layer.on('click', function(e) {
     L.DomEvent.stopPropagation(e);
     const latlng = e.latlng;
-    // 현재 표시 중인 모든 레이어에서 클릭 지점 포함하는 폴리곤 찾기
+    // point-in-polygon ray casting (정확한 겹침 감지)
     const hits = [];
     const seen = new Set();
     allLayers.forEach(item => {
       if (!item.layer._map) return;
       try {
+        // bounds 사전 필터 + 실제 PIP 검사
         if (item.layer.getBounds && item.layer.getBounds().contains(latlng)) {
-          const sn = item.props['PRESENT_SN'];
-          if (!seen.has(sn)) { seen.add(sn); hits.push({ props: item.props, geometry: item.geometry }); }
+          if (_pointInGeometry(latlng.lng, latlng.lat, item.geometry)) {
+            const sn = item.props['PRESENT_SN'];
+            if (!seen.has(sn)) { seen.add(sn); hits.push({ props: item.props, geometry: item.geometry }); }
+          }
         }
       } catch(ex) {}
     });
