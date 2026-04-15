@@ -352,6 +352,17 @@ function buildPopupCard(hp) {
   const pn = _PP_MAP[hp['추진단계']]||hp['추진단계']||'-';
   const gn = hp['자치구']||'-';
   const am = hp['면적_m2']?Math.round(hp['면적_m2']).toLocaleString('ko-KR')+' ㎡':'-';
+  const addr = hp['주소'] || hp['주소/위치'] || '-';
+  if (hp['대분류'] === 'BZ700') {
+    return `<div style="line-height:1.5">
+      <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px;letter-spacing:-0.01em">${hp['사업명']||'-'}</div>
+      <span style="display:inline-block;background:var(--accent-light);color:var(--accent);border-radius:2px;padding:1px 6px;font-size:11px;font-weight:600;letter-spacing:0.02em">${tn}</span>
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:2px 8px;margin-top:6px;font-size:12px;padding:8px 10px;background:var(--bg-secondary);border-radius:var(--radius-sm);border:1px solid var(--border-grid)">
+        <span style="color:var(--text-muted);font-weight:500">주소</span><span style="color:var(--text);word-break:break-word">${addr}</span>
+      </div>
+      <button onclick="hideFeature('${hp['PRESENT_SN']}')" style="margin-top:6px;padding:2px 8px;font-size:11px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg);color:var(--text-muted);cursor:pointer;font-weight:500;font-family:var(--font);transition:all .12s" onmouseover="this.style.borderColor='var(--danger)';this.style.color='var(--danger)'" onmouseout="this.style.borderColor='';this.style.color=''">\uc228\uae30\uae30</button>
+    </div>`;
+  }
   return `<div style="line-height:1.5">
     <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;letter-spacing:-0.01em">${hp['사업명']||'-'}</div>
     <span style="display:inline-block;background:var(--accent-light);color:var(--accent);border-radius:2px;padding:1px 6px;font-size:11px;font-weight:600;letter-spacing:0.02em">${tn}</span>
