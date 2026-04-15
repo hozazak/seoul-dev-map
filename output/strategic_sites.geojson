@@ -1,0 +1,745 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_001",
+        "사업명": "용산국제업무지구(도시혁신구역 후보지)",
+        "자치구": "용산구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          126.95743,
+          37.5287
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_002",
+        "사업명": "금천공군부대(도시혁신구역 후보지)",
+        "자치구": "금천구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          126.89796,
+          37.4684
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_003",
+        "사업명": "청량리역 일대(도시혁신구역 후보지)",
+        "자치구": "동대문구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.04821,
+          37.58067
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_004",
+        "사업명": "서초구청사(도시혁신구역 후보지)",
+        "자치구": "서초구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.03346,
+          37.48359
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_005",
+        "사업명": "김포공항 일대(도시혁신구역 후보지)",
+        "자치구": "강서구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          126.81177,
+          37.55284
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_006",
+        "사업명": "서부운전면허시험장",
+        "자치구": "마포구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          126.88211,
+          37.57924
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_007",
+        "사업명": "강서구 군부대 이적지",
+        "자치구": "강서구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          126.79313,
+          37.55568
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_008",
+        "사업명": "가락시장역 일대 전파관리소",
+        "자치구": "송파구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.11744,
+          37.49672
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_009",
+        "사업명": "창동차량기지",
+        "자치구": "노원구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.08622,
+          37.62491
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_010",
+        "사업명": "창동 하나로마트",
+        "자치구": "도봉구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.05178,
+          37.6549
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_011",
+        "사업명": "도봉운전면허시험장",
+        "자치구": "노원구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.05857,
+          37.65648
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_012",
+        "사업명": "국립중앙의료원 이전 예정부지",
+        "자치구": "중구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.00523,
+          37.56732
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_013",
+        "사업명": "노량진 수산시장 옆 시유지",
+        "자치구": "동작구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          126.93774,
+          37.51472
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_014",
+        "사업명": "코원에너지부지",
+        "자치구": "강남구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.06579,
+          37.49892
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_015",
+        "사업명": "이문차량기지",
+        "자치구": "동대문구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.06756,
+          37.60237
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_016",
+        "사업명": "수서차량기지",
+        "자치구": "강남구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.10526,
+          37.48643
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_017",
+        "사업명": "고덕차량기지",
+        "자치구": "강동구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.16553,
+          37.5664
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_018",
+        "사업명": "여의도 KBS본관부지",
+        "자치구": "영등포구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          126.91635,
+          37.52543
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_019",
+        "사업명": "여의도 KBS별관부지",
+        "자치구": "영등포구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          126.92976,
+          37.5179
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_020",
+        "사업명": "용산캠프킴부지",
+        "자치구": "용산구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          126.97404,
+          37.53517
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_021",
+        "사업명": "한국전력공사 자재센터 (마장동 765-1)",
+        "자치구": "성동구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.04045,
+          37.56743
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_022",
+        "사업명": "잠실 스포츠 MICE 복합공간 조성",
+        "자치구": "송파구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.07373,
+          37.51503
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_023",
+        "사업명": "서울의료원 강남분원 이전부지",
+        "자치구": "강남구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.06572,
+          37.51344
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_024",
+        "사업명": "국립보건원 부지(은평구 통일로 684일대)",
+        "자치구": "은평구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          126.93267,
+          37.60874
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_025",
+        "사업명": "옛 국군정보사령부 부지(서리풀 지구단위계획구역)",
+        "자치구": "서초구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.01751,
+          37.48818
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_026",
+        "사업명": "양재 도시첨단 물류단지(양재동 225)",
+        "자치구": "서초구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.0361,
+          37.46838
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_027",
+        "사업명": "서부트럭터미널(신정동 1315)",
+        "자치구": "양천구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          126.85212,
+          37.51624
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_028",
+        "사업명": "태릉CC",
+        "자치구": "노원구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.08818,
+          37.63021
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_029",
+        "사업명": "남부터미널",
+        "자치구": "서초구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.01513,
+          37.48351
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_030",
+        "사업명": "수서공영주차장",
+        "자치구": "강남구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.09838,
+          37.48445
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_031",
+        "사업명": "정릉 공영차고지",
+        "자치구": "성북구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.01082,
+          37.60658
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_032",
+        "사업명": "남부도로사업소",
+        "자치구": "은평구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          126.93422,
+          37.60707
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_033",
+        "사업명": "마포 농수산물시장",
+        "자치구": "마포구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          126.91246,
+          37.55202
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_034",
+        "사업명": "501 정보대(용산)",
+        "자치구": "용산구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          126.99124,
+          37.51769
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_035",
+        "사업명": "한국국방연구원, 한국경제발전전시관 부지(회기동)",
+        "자치구": "동대문구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.04263,
+          37.59453
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_036",
+        "사업명": "양재 양곡도매시장",
+        "자치구": "서초구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.04962,
+          37.45942
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "PRESENT_SN": "STRATEGIC_037",
+        "사업명": "개화산역 공영주차장",
+        "자치구": "강서구",
+        "추진단계": "전략후보",
+        "면적_m2": 0,
+        "대분류": "BZ700",
+        "중분류": "",
+        "소분류": "BZ701"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          126.81422,
+          37.57682
+        ]
+      }
+    }
+  ]
+}
