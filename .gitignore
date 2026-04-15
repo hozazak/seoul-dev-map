@@ -28,3 +28,4 @@ output/district_plan_data.js
 # docs/data는 GitHub Pages용이므로 포함
 !docs/data/
 !docs/data/**
+output/서울_도시계획사업_계획심의.xlsx
