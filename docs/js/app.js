@@ -576,6 +576,48 @@ function applyFilters() {
 
   const hiddenCount = hiddenSNs.size > 0 ? ` (${hiddenSNs.size}건 숨김)` : '';
   document.getElementById('counter').textContent = `${filtered.length.toLocaleString('ko-KR')}건 표시 중 (전체 ${GEOJSON.features.length.toLocaleString('ko-KR')}건)${hiddenCount}`;
+
+  // ── 레전드 건수 동적 갱신 ──
+  const fTypeCounts = {};
+  const fStageCounts = Object.fromEntries(Object.keys(STAGE_GROUPS).map(k => [k, 0]));
+  const fGuCounts = Object.fromEntries(GU_LIST.map(n => [n, 0]));
+  filtered.forEach(feat => {
+    const p = feat.properties || {};
+    const tc = p['소분류'] || p['대분류'] || '';
+    if (tc) fTypeCounts[tc] = (fTypeCounts[tc] || 0) + 1;
+    const sg = getStageGroup(p['추진단계'] || '');
+    if (sg) fStageCounts[sg] = (fStageCounts[sg] || 0) + 1;
+    const gn = GU_LABELS[p['자치구']] || p['자치구'] || '';
+    if (fGuCounts[gn] !== undefined) fGuCounts[gn] += 1;
+  });
+
+  // 사업유형 건수 갱신
+  document.querySelectorAll('#type-filters .type-child').forEach(cb => {
+    const code = cb.dataset.code;
+    const countEl = cb.closest('.filter-check')?.querySelector('.filter-count');
+    if (countEl) countEl.textContent = `${(fTypeCounts[code] || 0).toLocaleString('ko-KR')}건`;
+  });
+  document.querySelectorAll('#type-filters .type-parent').forEach(cb => {
+    const group = TYPE_GROUPS.find(g => g.code === cb.dataset.parent);
+    if (!group) return;
+    const parentCount = group.children.reduce((sum, child) => sum + (fTypeCounts[child.code] || 0), 0);
+    const countEl = cb.closest('.filter-check')?.querySelector('.filter-count');
+    if (countEl) countEl.textContent = `${parentCount.toLocaleString('ko-KR')}건`;
+  });
+
+  // 진행단계 건수 갱신
+  document.querySelectorAll('#stage-filters .stage-check').forEach(cb => {
+    const name = cb.dataset.stage;
+    const countEl = cb.closest('.filter-check')?.querySelector('.filter-count');
+    if (countEl) countEl.textContent = `${(fStageCounts[name] || 0).toLocaleString('ko-KR')}건`;
+  });
+
+  // 자치구 건수 갱신
+  document.querySelectorAll('#gu-filters .gu-check').forEach(cb => {
+    const name = cb.dataset.gu;
+    const countEl = cb.closest('.filter-check')?.querySelector('.filter-count');
+    if (countEl) countEl.textContent = `${(fGuCounts[name] || 0).toLocaleString('ko-KR')}건`;
+  });
 }
 
 // 색상 모드 전환
