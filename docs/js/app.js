@@ -426,20 +426,25 @@ function openOverlapPopup(latlng, hits) {
   L.popup({maxWidth:420,maxHeight:400,autoPan:false}).setLatLng(popupLatLng).setContent(window._planZoneBadgeHtml + header + cards).openOn(map);
 }
 
-function highlightFeature(idx) {
-  const hit = window._overlapHits[idx];
-  if (!hit) return;
+function highlightFeatureDirect(geometry) {
+  if (!geometry) return;
   if (highlightLayer) { map.removeLayer(highlightLayer); highlightLayer = null; }
-  if (hit.geometry.type === 'Point') {
-    const c = hit.geometry.coordinates;
+  if (geometry.type === 'Point') {
+    const c = geometry.coordinates;
     highlightLayer = L.circleMarker([c[1], c[0]], {
       radius: 14, color: '#2c5ea0', weight: 3, fillOpacity: 0, dashArray: '6,4', interactive: false
     }).addTo(map);
   } else {
-    highlightLayer = L.geoJSON(hit.geometry, {
+    highlightLayer = L.geoJSON(geometry, {
       style: { color: '#2c5ea0', weight: 4, fillOpacity: 0, dashArray: '10,5' }, interactive: false
     }).addTo(map);
   }
+}
+
+function highlightFeature(idx) {
+  const hit = window._overlapHits[idx];
+  if (!hit) return;
+  highlightFeatureDirect(hit.geometry);
   // 팝업 카드 선택 표시
   document.querySelectorAll('[id^=overlap-card-]').forEach((el, i) => {
     el.classList.remove('hl-active');
@@ -517,6 +522,15 @@ function onEachFeature(feature, layer) {
       return;
     }
     const latlng = e.latlng;
+    if (p['대분류'] === 'BZ700' && feature.geometry && feature.geometry.type === 'Point') {
+      if (highlightLayer) { map.removeLayer(highlightLayer); highlightLayer = null; }
+      highlightFeatureDirect(feature.geometry);
+      L.popup({ maxWidth: 360, autoPan: true })
+        .setLatLng(latlng)
+        .setContent(buildPopupCard(p))
+        .openOn(map);
+      return;
+    }
     // point-in-polygon ray casting (정확한 겹침 감지)
     const hits = [];
     const seen = new Set();
