@@ -19,15 +19,16 @@ const SGG_COLORS = {
   "11500":"#3498DB","11530":"#E67E22","11545":"#F1C40F","11560":"#8E44AD","11590":"#27AE60",
   "11620":"#16A085","11650":"#2980B9","11680":"#C0392B","11710":"#D35400","11740":"#7F8C8D"
 };
-const COLOR_MAP = {"":"#999999", "BZ100":"#E74C3C", "BZ200":"#3498DB", "BZ300":"#2ECC71", "BZ400":"#F39C12", "BZ500":"#9B59B6", "BZ600":"#1ABC9C"};
-const BZ_PARENT = {"BZ101":"BZ100", "BZ102":"BZ100", "BZ103":"BZ100", "BZ104":"BZ100", "BZ105":"BZ100", "BZ107":"BZ100", "BZ108":"BZ100", "BZ201":"BZ200", "BZ202":"BZ200", "BZ203":"BZ200", "BZ204":"BZ200", "BZ205":"BZ200", "BZ301":"BZ300", "BZ302":"BZ300", "BZ303":"BZ300", "BZ304":"BZ300", "BZ305":"BZ300", "BZ306":"BZ300", "BZ401":"BZ400", "BZ402":"BZ400", "BZ403":"BZ400", "BZ404":"BZ400", "BZ501":"BZ500", "BZ502":"BZ500", "BZ601":"BZ600", "BZ602":"BZ600", "BZ603":"BZ600", "BZ604":"BZ600", "BZ606":"BZ600"};
+const COLOR_MAP = {"":"#999999", "BZ100":"#E74C3C", "BZ200":"#3498DB", "BZ300":"#2ECC71", "BZ400":"#F39C12", "BZ500":"#9B59B6", "BZ600":"#1ABC9C", "BZ700":"#FF1744"};
+const BZ_PARENT = {"BZ101":"BZ100", "BZ102":"BZ100", "BZ103":"BZ100", "BZ104":"BZ100", "BZ105":"BZ100", "BZ107":"BZ100", "BZ108":"BZ100", "BZ201":"BZ200", "BZ202":"BZ200", "BZ203":"BZ200", "BZ204":"BZ200", "BZ205":"BZ200", "BZ301":"BZ300", "BZ302":"BZ300", "BZ303":"BZ300", "BZ304":"BZ300", "BZ305":"BZ300", "BZ306":"BZ300", "BZ401":"BZ400", "BZ402":"BZ400", "BZ403":"BZ400", "BZ404":"BZ400", "BZ501":"BZ500", "BZ502":"BZ500", "BZ601":"BZ600", "BZ602":"BZ600", "BZ603":"BZ600", "BZ604":"BZ600", "BZ606":"BZ600", "BZ701":"BZ700"};
 const TYPE_GROUPS = [
   { code: 'BZ100', name: '정비사업', color: '#E74C3C', children: [{ code: 'BZ101', name: '신속통합기획' }, { code: 'BZ102', name: '재개발(도시정비형)' }, { code: 'BZ103', name: '재개발(주택정비형)' }, { code: 'BZ104', name: '재건축(단독)' }, { code: 'BZ105', name: '재건축(공동)' }, { code: 'BZ107', name: '주거환경개선(관리형)' }, { code: 'BZ108', name: '주거환경개선(정비형)' }] },
   { code: 'BZ200', name: '소규모정비', color: '#3498DB', children: [{ code: 'BZ201', name: '모아타운' }, { code: 'BZ202', name: '가로주택정비' }, { code: 'BZ203', name: '자율주택정비' }, { code: 'BZ204', name: '소규모재건축' }, { code: 'BZ205', name: '소규모재개발' }] },
   { code: 'BZ300', name: '역세권·공공주택', color: '#2ECC71', children: [{ code: 'BZ301', name: '장기전세주택' }, { code: 'BZ302', name: '역세권활성화' }, { code: 'BZ303', name: '청년안심주택' }, { code: 'BZ304', name: '어르신안심주택' }, { code: 'BZ305', name: '신혼부부안심주택' }, { code: 'BZ306', name: '미리내집' }] },
   { code: 'BZ400', name: '재정비촉진(뉴타운)', color: '#F39C12', children: [{ code: 'BZ401', name: '재정비촉진지구' }, { code: 'BZ402', name: '재정비촉진구역' }, { code: 'BZ403', name: '존치정비구역' }, { code: 'BZ404', name: '존치관리구역' }] },
   { code: 'BZ500', name: '공공주택·도심복합', color: '#9B59B6', children: [{ code: 'BZ501', name: '공공주택지구조성' }, { code: 'BZ502', name: '도심공공주택복합' }] },
-  { code: 'BZ600', name: '도시개발·재생·기타', color: '#1ABC9C', children: [{ code: 'BZ601', name: '도시개발사업' }, { code: 'BZ602', name: '공동주택리모델링' }, { code: 'BZ603', name: '시장정비사업' }, { code: 'BZ604', name: '도시재생활성화' }, { code: 'BZ606', name: '사전협상제' }] }
+  { code: 'BZ600', name: '도시개발·재생·기타', color: '#1ABC9C', children: [{ code: 'BZ601', name: '도시개발사업' }, { code: 'BZ602', name: '공동주택리모델링' }, { code: 'BZ603', name: '시장정비사업' }, { code: 'BZ604', name: '도시재생활성화' }, { code: 'BZ606', name: '사전협상제' }] },
+  { code: 'BZ700', name: '전략사업지', color: '#FF1744', children: [{ code: 'BZ701', name: '전략사업후보지' }] }
 ];
 const GU_LABELS = {"종로구":"종로구", "중구":"중구", "용산구":"용산구", "성동구":"성동구", "광진구":"광진구", "동대문구":"동대문구", "중랑구":"중랑구", "성북구":"성북구", "강북구":"강북구", "도봉구":"도봉구", "노원구":"노원구", "은평구":"은평구", "서대문구":"서대문구", "마포구":"마포구", "양천구":"양천구", "강서구":"강서구", "구로구":"구로구", "금천구":"금천구", "영등포구":"영등포구", "동작구":"동작구", "관악구":"관악구", "서초구":"서초구", "강남구":"강남구", "송파구":"송파구", "강동구":"강동구"};
 
@@ -60,6 +61,7 @@ const _DEFAULT_ON_TYPES = new Set([
   'BZ502',  // 도심공공주택복합
   'BZ601',  // 도시개발사업
   'BZ606',  // 사전협상제
+  'BZ701',  // 전략사업후보지
 ]);
 let checkedTypes = new Set(allTypeCodes.filter(c => _DEFAULT_ON_TYPES.has(c)));
 const _DEFAULT_ON_STAGES = new Set(['계획/기획','심의/인가']);
@@ -344,7 +346,7 @@ GEOJSON.features.forEach(f => {
 
 // 팝업 카드 생성 함수 (전역)
 const _PP_MAP={"PP0101": "대상지선정(추진중)", "PP0102": "대상지선정", "PP0103": "기획완료", "PP0104": "보류", "PP0105": "취소", "PP0201": "입안제안", "PP0202": "열람공고", "PP0203": "위원회심의", "PP0204": "구역지정", "PP0205": "추진위구성", "PP0206": "조합설립인가", "PP0207": "건축심의", "PP0208": "사업시행인가", "PP0209": "관리처분계획인가", "PP0210": "착공", "PP0211": "준공", "PP0212": "취소", "PP0301": "대상지선정", "PP0302": "정비계획수립", "PP0303": "위원회심의", "PP0304": "구역지정", "PP0305": "사업시행인가", "PP0306": "착공", "PP0307": "준공(일부)", "PP0308": "준공", "PP0401": "수립범위 자문", "PP0402": "대상지선정", "PP0404": "사전자문", "PP0405": "위원회심의", "PP0406": "관리지역고시", "PP0407": "취소", "PP0500": "조합설립인가 추진중", "PP0501": "조합설립인가", "PP0502": "건축심의", "PP0503": "사업시행인가", "PP0504": "착공", "PP0505": "준공", "PP0506": "중단", "PP0601": "주민합의체 구성", "PP0602": "건축심의", "PP0603": "사업시행인가", "PP0604": "착공", "PP0605": "준공", "PP0606": "중단", "PP0701": "조합설립추진중", "PP0702": "조합설립인가", "PP0703": "건축심의", "PP0704": "사업시행계획인가", "PP0705": "착공", "PP0706": "준공", "PP0707": "중단", "PP0801": "대상지선정", "PP0802": "사전검토", "PP0803": "입안제안", "PP0804": "열람공고", "PP0805": "위원회심의", "PP0806": "구역지정", "PP0807": "건축심의", "PP0808": "사업계획승인", "PP0809": "착공", "PP0810": "준공", "PP0811": "취소", "PP0901": "대상지선정", "PP0902": "통심위 사전자문", "PP0903": "입안제안", "PP0904": "열람공고", "PP0905": "위원회심의", "PP0906": "구역지정", "PP0907": "건축심의", "PP0908": "사업계획승인", "PP0909": "건축허가", "PP0910": "착공", "PP0911": "사용승인", "PP0912": "입주", "PP0913": "취소", "PP1001": "지구지정", "PP1002": "지구변경", "PP1003": "지구해제", "PP1101": "대상지선정", "PP1102": "촉진계획수립(변경)", "PP1103": "열람공고", "PP1104": "위원회심의", "PP1105": "구역지정", "PP1106": "구역취소", "PP1107": "추진위구성", "PP1108": "조합설립인가", "PP1109": "건축심의", "PP1110": "사업시행인가", "PP1111": "관리처분계획인가", "PP1112": "착공", "PP1113": "준공", "PP1201": "예정지구지정", "PP1202": "후보지선정", "PP1203": "지구지정", "PP1204": "설계공모완료", "PP1205": "사업계획승인", "PP1206": "착공", "PP1207": "준공", "PP1208": "입주중", "PP1209": "후보지철회", "PP1210": "해제", "PP1301": "입안제안", "PP1302": "열람공고", "PP1303": "위원회심의", "PP1304": "구역지정", "PP1305": "실시계획인가", "PP1306": "준공", "PP1307": "구역지정해제", "PP1401": "조합설립인가", "PP1402": "1차 안전진단", "PP1403": "건축심의", "PP1404": "리모델링허가승인", "PP1405": "2차 안전진단", "PP1406": "착공", "PP1407": "준공", "PP1408": "취소", "PP1501": "추진계획수립중", "PP1502": "추진계획승인", "PP1503": "조합설립인가", "PP1504": "사업시행계획인가", "PP1505": "관리처분계획인가", "PP1506": "착공", "PP1507": "준공", "PP1508": "중단(실효)", "PP1601": "대상지선정", "PP1602": "활성화계획수립", "PP1603": "마중물사업(추진중)", "PP1604": "사업완료", "PP1605": "취소", "PP1801": "대상지선정", "PP1802": "통심위 사전자문", "PP1803": "입안제안", "PP1804": "열람공고", "PP1805": "위원회심의", "PP1806": "구역지정", "PP1807": "건축심의", "PP1808": "사업계획승인", "PP1809": "착공", "PP1810": "준공", "PP1811": "취소", "PP1901": "입주자 모집공고 중", "PP1902": "입주자 모집공고 완료", "PP2001": "입안제안", "PP2002": "열람공고", "PP2003": "위원회심의", "PP2004": "구역지정", "PP2005": "지구계획승인(변경)", "PP2006": "착공", "PP2007": "준공", "PP2008": "구역지정해제", "PP2101": "구역지정", "PP2102": "구역변경", "PP2103": "구역해제", "PP2201": "대상지 선정", "PP2202": "제안서접수", "PP2203": "협상조정협의회 운영", "PP2204": "협상완료", "PP2205": "입안절차 진행", "PP2206": "도시건축공동위 심의", "PP2207": "결정고시", "PP2208": "인허가 절차", "PP2209": "착공", "PP2210": "준공", "PP2211": "제외"};
-const _BZ_MAP={"BZ101": "신속통합기획", "BZ102": "재개발(도시정비형)", "BZ103": "재개발(주택정비형)", "BZ104": "재건축(단독)", "BZ105": "재건축(공동)", "BZ107": "주거환경개선(관리형)", "BZ108": "주거환경개선(정비형)", "BZ201": "모아타운", "BZ202": "가로주택정비", "BZ203": "자율주택정비", "BZ204": "소규모재건축", "BZ205": "소규모재개발", "BZ301": "장기전세주택", "BZ302": "역세권활성화", "BZ303": "청년안심주택", "BZ304": "어르신안심주택", "BZ305": "신혼부부안심주택", "BZ306": "미리내집", "BZ401": "재정비촉진지구", "BZ402": "재정비촉진구역", "BZ403": "존치정비구역", "BZ404": "존치관리구역", "BZ501": "공공주택지구조성", "BZ502": "도심공공주택복합", "BZ601": "도시개발사업", "BZ602": "공동주택리모델링", "BZ603": "시장정비사업", "BZ604": "도시재생활성화", "BZ606": "사전협상제", "BZ801": "지구단위계획", "BZ802": "특별계획"};
+const _BZ_MAP={"BZ101": "신속통합기획", "BZ102": "재개발(도시정비형)", "BZ103": "재개발(주택정비형)", "BZ104": "재건축(단독)", "BZ105": "재건축(공동)", "BZ107": "주거환경개선(관리형)", "BZ108": "주거환경개선(정비형)", "BZ201": "모아타운", "BZ202": "가로주택정비", "BZ203": "자율주택정비", "BZ204": "소규모재건축", "BZ205": "소규모재개발", "BZ301": "장기전세주택", "BZ302": "역세권활성화", "BZ303": "청년안심주택", "BZ304": "어르신안심주택", "BZ305": "신혼부부안심주택", "BZ306": "미리내집", "BZ401": "재정비촉진지구", "BZ402": "재정비촉진구역", "BZ403": "존치정비구역", "BZ404": "존치관리구역", "BZ501": "공공주택지구조성", "BZ502": "도심공공주택복합", "BZ601": "도시개발사업", "BZ602": "공동주택리모델링", "BZ603": "시장정비사업", "BZ604": "도시재생활성화", "BZ606": "사전협상제", "BZ801": "지구단위계획", "BZ802": "특별계획", "BZ701": "전략사업후보지"};
 function buildPopupCard(hp) {
   const tn = _BZ_MAP[hp['소분류']]||_BZ_MAP[hp['대분류']]||hp['소분류']||hp['대분류']||'-';
   const pn = _PP_MAP[hp['추진단계']]||hp['추진단계']||'-';
@@ -417,9 +419,16 @@ function highlightFeature(idx) {
   const hit = window._overlapHits[idx];
   if (!hit) return;
   if (highlightLayer) { map.removeLayer(highlightLayer); highlightLayer = null; }
-  highlightLayer = L.geoJSON(hit.geometry, {
-    style: { color: '#2c5ea0', weight: 4, fillOpacity: 0, dashArray: '10,5' }, interactive: false
-  }).addTo(map);
+  if (hit.geometry.type === 'Point') {
+    const c = hit.geometry.coordinates;
+    highlightLayer = L.circleMarker([c[1], c[0]], {
+      radius: 14, color: '#2c5ea0', weight: 3, fillOpacity: 0, dashArray: '6,4', interactive: false
+    }).addTo(map);
+  } else {
+    highlightLayer = L.geoJSON(hit.geometry, {
+      style: { color: '#2c5ea0', weight: 4, fillOpacity: 0, dashArray: '10,5' }, interactive: false
+    }).addTo(map);
+  }
   // 팝업 카드 선택 표시
   document.querySelectorAll('[id^=overlap-card-]').forEach((el, i) => {
     el.classList.remove('hl-active');
@@ -504,7 +513,14 @@ function onEachFeature(feature, layer) {
       if (!item.layer._map) return;
       try {
         // bounds 사전 필터 + 실제 PIP 검사
-        if (item.layer.getBounds && item.layer.getBounds().contains(latlng)) {
+        if (item.geometry.type === 'Point') {
+          const c = item.geometry.coordinates;
+          const d = Math.sqrt(Math.pow(c[0]-latlng.lng,2)+Math.pow(c[1]-latlng.lat,2));
+          if (d < 0.003) {
+            const sn = item.props['PRESENT_SN'];
+            if (!seen.has(sn)) { seen.add(sn); hits.push({ props: item.props, geometry: item.geometry }); }
+          }
+        } else if (item.layer.getBounds && item.layer.getBounds().contains(latlng)) {
           if (_pointInGeometry(latlng.lng, latlng.lat, item.geometry)) {
             const sn = item.props['PRESENT_SN'];
             if (!seen.has(sn)) { seen.add(sn); hits.push({ props: item.props, geometry: item.geometry }); }
@@ -521,7 +537,18 @@ function onEachFeature(feature, layer) {
 
 geojsonLayer = L.geoJSON(GEOJSON, {
   style: styleFeature,
-  onEachFeature: onEachFeature
+  onEachFeature: onEachFeature,
+  pointToLayer: function(feature, latlng) {
+    const color = getColor(feature.properties['대분류'] || '');
+    return L.circleMarker(latlng, {
+      radius: 9,
+      fillColor: color,
+      color: '#fff',
+      weight: 2.5,
+      opacity: 1,
+      fillOpacity: 0.9
+    });
+  }
 }).addTo(map);
 
 // 팝업 닫으면 하이라이트 제거
@@ -545,14 +572,14 @@ function applyFilters() {
     if (!checkedTypes.has(typeCode)) return false;
 
     const stageGroup = getStageGroup(p['추진단계'] || '');
-    if (!stageGroup || !checkedStages.has(stageGroup)) return false;
+    if (p['대분류'] !== 'BZ700' && (!stageGroup || !checkedStages.has(stageGroup))) return false;
 
     const guName = GU_LABELS[p['자치구']] || p['자치구'] || '';
     if (!checkedGu.has(guName)) return false;
 
     const area = p['면적_m2'] || 0;
     const areaFiltered = (areaMin > 0 || areaMax < AREA_MAX_LIMIT);
-    if (area <= 0 && areaFiltered) return false;
+    if (area <= 0 && areaFiltered && p['대분류'] !== 'BZ700') return false;
     if (area > 0) {
       if (area < areaMin) return false;
       if (areaMax < AREA_MAX_LIMIT && area > areaMax) return false;
@@ -571,7 +598,18 @@ function applyFilters() {
 
   L.geoJSON({ type: 'FeatureCollection', features: filtered }, {
     style: styleFeature,
-    onEachFeature: onEachFeature
+    onEachFeature: onEachFeature,
+    pointToLayer: function(feature, latlng) {
+      const color = getColor(feature.properties['대분류'] || '');
+      return L.circleMarker(latlng, {
+        radius: 9,
+        fillColor: color,
+        color: '#fff',
+        weight: 2.5,
+        opacity: 1,
+        fillOpacity: 0.9
+      });
+    }
   }).addTo(geojsonLayer);
 
   const hiddenCount = hiddenSNs.size > 0 ? ` (${hiddenSNs.size}건 숨김)` : '';
