@@ -1,6 +1,14 @@
 async function initApp() {
-  const response = await fetch('./data/projects.json');
-  const GEOJSON = await response.json();
+  const [response, guBoundaryResponse, cityBoundaryResponse] = await Promise.all([
+    fetch('./data/projects.json'),
+    fetch('./data/seoul_districts.geojson'),
+    fetch('./data/seoul_city_boundary.geojson')
+  ]);
+  const [GEOJSON, GU_BOUNDARIES, CITY_BOUNDARY] = await Promise.all([
+    response.json(),
+    guBoundaryResponse.json(),
+    cityBoundaryResponse.json()
+  ]);
 const STAGE_GROUPS = {
   "계획/기획": { color: "#A8D8EA", codes: ["PP0101", "PP0102", "PP0103", "PP0201", "PP0202", "PP0301", "PP0302", "PP0401", "PP0402", "PP0802", "PP0803", "PP0801", "PP0804", "PP0901", "PP0902", "PP0903", "PP0904", "PP1101", "PP1102", "PP1103", "PP1201", "PP1202", "PP1301", "PP1302", "PP1601", "PP1602", "PP1801", "PP1802", "PP1803", "PP2001", "PP2002", "PP2201", "PP2202", "PP2203"] },
   "심의/인가": { color: "#FFD700", codes: ["PP0203", "PP0204", "PP0205", "PP0206", "PP0303", "PP0304", "PP0403", "PP0404", "PP0405", "PP0406", "PP0500", "PP0501", "PP0502", "PP0503", "PP0601", "PP0602", "PP0603", "PP0701", "PP0702", "PP0703", "PP0805", "PP0806", "PP0807", "PP0905", "PP0906", "PP0907", "PP1001", "PP1002", "PP1104", "PP1105", "PP1107", "PP1108", "PP1109", "PP1110", "PP1203", "PP1204", "PP1303", "PP1304", "PP1401", "PP1402", "PP1403", "PP1501", "PP1502", "PP1503", "PP1603", "PP1804", "PP1805", "PP1806", "PP2003", "PP2004", "PP2005", "PP2101", "PP2102", "PP2204", "PP2205", "PP2206", "PP2207"] },
@@ -69,6 +77,10 @@ let checkedStages = new Set(Object.keys(STAGE_GROUPS).filter(s => _DEFAULT_ON_ST
 let checkedGu = new Set(GU_LIST);
 let allLayers = [];
 let geojsonLayer;
+let guBoundaryLayer = null;
+let cityBoundaryLayer = null;
+let guBoundaryOn = true;
+let cityBoundaryOn = true;
 let searchTerm = '';
 let colorMode = 'type'; // 'type' or 'stage'
 let hiddenSNs = new Set(); // 개별 숨김
@@ -107,6 +119,47 @@ L.control.layers({
   '위성': baseSatellite,
   '하이브리드': baseHybrid
 }, null, { position: 'topleft' }).addTo(map);
+
+map.createPane('guBoundaryPane');
+map.getPane('guBoundaryPane').style.zIndex = 445;
+map.getPane('guBoundaryPane').style.pointerEvents = 'none';
+
+map.createPane('cityBoundaryPane');
+map.getPane('cityBoundaryPane').style.zIndex = 446;
+map.getPane('cityBoundaryPane').style.pointerEvents = 'none';
+
+guBoundaryLayer = L.geoJSON(GU_BOUNDARIES, {
+  pane: 'guBoundaryPane',
+  interactive: false,
+  style: {
+    color: '#334155',
+    weight: 1.2,
+    opacity: 0.72,
+    fillOpacity: 0,
+    dashArray: '4 4'
+  }
+});
+
+cityBoundaryLayer = L.geoJSON(CITY_BOUNDARY, {
+  pane: 'cityBoundaryPane',
+  interactive: false,
+  style: {
+    color: '#111827',
+    weight: 3,
+    opacity: 0.9,
+    fillOpacity: 0
+  }
+});
+
+function syncBoundaryLayers() {
+  if (cityBoundaryOn) cityBoundaryLayer.addTo(map);
+  else map.removeLayer(cityBoundaryLayer);
+
+  if (guBoundaryOn) guBoundaryLayer.addTo(map);
+  else map.removeLayer(guBoundaryLayer);
+}
+
+syncBoundaryLayers();
 /* ── 팝업 드래그 ── */
 map.on('popupopen', function(e) {
   const popup = e.popup;
@@ -584,6 +637,16 @@ map.on('popupclose', function() {
 document.getElementById('search').addEventListener('input', (e) => {
   searchTerm = e.target.value.trim().toLowerCase();
   applyFilters();
+});
+
+document.getElementById('toggle-city-boundary').addEventListener('change', function() {
+  cityBoundaryOn = this.checked;
+  syncBoundaryLayers();
+});
+
+document.getElementById('toggle-gu-boundary').addEventListener('change', function() {
+  guBoundaryOn = this.checked;
+  syncBoundaryLayers();
 });
 
 function applyFilters() {

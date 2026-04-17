@@ -525,6 +525,16 @@ body {
   background: rgba(192, 57, 43, 0.07);
 }
 
+.plan-zone-toggle.boundary-toggle .zone-swatch.city-boundary {
+  border: 2px solid #111827;
+  background: rgba(17, 24, 39, 0.08);
+}
+
+.plan-zone-toggle.boundary-toggle .zone-swatch.gu-boundary {
+  border: 2px dashed #334155;
+  background: rgba(51, 65, 85, 0.06);
+}
+
 /* ──────────────────────────────────────────
    면적 필터
 ────────────────────────────────────────── */
