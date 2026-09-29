@@ -95,7 +95,7 @@ const selectedHighlightLayers = {}; // sn -> Leaflet layer
 const map = L.map('map').setView([37.5665, 126.978], 11);
   window.map = map;
 // 베이스맵 레이어 (VWorld + CARTO)
-const VWORLD_KEY = 'A1B705BA-D8D0-38DF-9B5D-598162D8EC1F';
+const VWORLD_KEY = '04B12ACA-12EB-4319-9D67-BEEC622DE65B';
 const baseStreet = L.tileLayer(`https://api.vworld.kr/req/wmts/1.0.0/${VWORLD_KEY}/Base/{z}/{y}/{x}.png`, {
   attribution: '© VWorld 국토교통부 | 서울도시공간포털 UPIS',
   maxZoom: 19
