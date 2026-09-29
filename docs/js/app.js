@@ -108,7 +108,8 @@ const baseHybrid = L.layerGroup([
   L.tileLayer(`https://api.vworld.kr/req/wmts/1.0.0/${VWORLD_KEY}/Satellite/{z}/{y}/{x}.jpeg`, { maxZoom: 19 }),
   L.tileLayer(`https://api.vworld.kr/req/wmts/1.0.0/${VWORLD_KEY}/Hybrid/{z}/{y}/{x}.png`, { maxZoom: 19 })
 ]);
-const baseGray = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+const CARTO_KEY = 'cb1_2eyn_1_913b2215cd74d80223ccdbde';
+const baseGray = L.tileLayer(`https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=${CARTO_KEY}`, {
   attribution: '© OpenStreetMap © CARTO | UPIS',
   maxZoom: 19
 });
